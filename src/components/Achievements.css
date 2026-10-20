@@ -1,0 +1,97 @@
+.achievements-section { margin: 77px 4px 0; scroll-margin-top: 110px; }
+.achievements-heading { color: var(--on-mat); margin-bottom: 32px; }
+.achievements-heading h3 { font-size: 34px; letter-spacing: -.6px; }
+.achievements-heading>p { color: var(--mat-muted); margin-top: 7px; font-size: 12px; }
+.milestones-board { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 34px; }
+.contest-paper { position: relative; padding: 30px 31px 29px; background: var(--paper); color: var(--ink); box-shadow: 3px 5px 0 var(--shadow); transform: rotate(-.6deg); background-image: repeating-linear-gradient(transparent 0 27px, color-mix(in srgb, var(--ink) 3%, transparent) 27px 28px); }
+.milestone-paper-title { display: flex; align-items: center; gap: 9px; font-size: 26px; line-height: 1.25; font-weight: 400; margin: 0 0 24px; }
+.milestone-paper-title>svg { flex-shrink: 0; color: var(--accent); }
+.milestone-event { display: flex; align-items: center; gap: 13px; }
+.milestone-event h5, .milestone-list h5, .coding-profile h5 { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 600; }
+.achievement-mark { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; background: #f4f0e5; border: 1px solid #dcd6c8; border-radius: 9px; }
+.achievement-mark img { width: 25px; height: 25px; object-fit: contain; }
+.achievement-mark-large { width: 44px; height: 44px; }
+.achievement-mark-large img { width: 32px; height: 32px; }
+.milestone-year { display: block; font-size: 10px; color: var(--muted); white-space: nowrap; }
+.placement-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 19px; padding-bottom: 24px; border-bottom: 1px dashed var(--border); }
+.placement-label { font-size: 10px; color: var(--muted); }
+.placement-pair p { display: flex; align-items: center; gap: 11px; margin-top: 5px; }
+.placement-pair strong { font-size: 36px; font-weight: 600; letter-spacing: -1.6px; line-height: 1.15; color: var(--accent); font-variant-numeric: tabular-nums; }
+.placement-pair p>span { font-size: 9px; line-height: 1.6; color: var(--muted); }
+.milestone-list { list-style: none; display: grid; gap: 22px; padding: 23px 0 0; margin: 0; }
+.milestone-list>li { display: flex; align-items: flex-start; gap: 13px; }
+.milestone-list>li>div { flex: 1; min-width: 0; }
+.milestone-event-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 12px; }
+.milestone-event-line .milestone-year { margin-left: auto; }
+.milestone-result { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 3px; }
+.milestone-description { font-size: 11px; line-height: 1.8; color: var(--muted); margin-top: 3px; }
+.milestone-project-link { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); margin-top: 5px; font-size: 10px; }
+.milestone-project-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.coding-column { display: grid; gap: 24px; padding-top: 14px; }
+.coding-paper { padding: 27px 26px 23px; background: var(--paper-raised); color: var(--ink); box-shadow: 3px 5px 0 var(--shadow); transform: rotate(1deg); }
+.coding-profile-list { display: grid; gap: 23px; }
+.coding-profile { display: block; }
+.coding-profile-heading { display: flex; align-items: center; gap: 10px; }
+.coding-profile-heading>svg { margin-left: auto; color: var(--muted); transition: transform .2s; }
+.coding-profile:hover .coding-profile-heading>svg { transform: translate(2px, -2px); }
+.coding-handle { display: block; font-size: 10px; color: var(--muted); overflow-wrap: anywhere; }
+.coding-distinction { font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -.6px; margin-top: 11px; }
+.coding-profile-detail { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.coding-profile:hover h5 { text-decoration: underline; text-underline-offset: 3px; }
+.scholarship-note { display: flex; align-items: flex-start; gap: 12px; padding: 22px 23px; background: var(--note); color: var(--ink); box-shadow: 2px 4px 0 var(--shadow); transform: rotate(-1.5deg); }
+.scholarship-note>svg { flex-shrink: 0; color: var(--accent); }
+.scholarship-note h4 { font-size: 13px; font-weight: 600; line-height: 1.5; }
+.scholarship-note p { font-size: 10px; line-height: 1.7; margin-top: 3px; }
+.scholarship-note span { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
+.profile-milestones { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 11px; margin-top: 15px; }
+.profile-milestones:hover { text-decoration: underline; text-underline-offset: 4px; }
+.project-onyxbin .project-image-button>img { object-fit: contain; background: #15171c; }
+.project-gallery-image { width: 100%; height: auto; aspect-ratio: 1.6; object-fit: contain; background: #15171c; border-radius: 3px; }
+.project-gallery-controls { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+.project-gallery-controls button { padding: 7px 12px; font-size: 11px; border: 1px solid var(--border); color: var(--muted); background: transparent; border-radius: 3px; transition: background .2s, color .2s; }
+.project-gallery-controls button[aria-pressed='true'] { color: var(--ink); background: var(--note); border-color: var(--accent); }
+.project-gallery-controls button:hover { color: var(--ink); }
+.project-gallery .detail-caption { min-height: 2.8em; line-height: 1.5; margin-top: 10px; }
+@media (max-width: 900px) {
+  .milestones-board { gap: 24px; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+  .contest-paper { padding: 27px 23px; }
+  .coding-paper { padding: 26px 22px; }
+  .placement-pair p { flex-direction: column; align-items: flex-start; gap: 5px; }
+  .milestone-event-line { display: block; }
+  .coding-distinction { font-size: 20px; }
+}
+@media (max-width: 767px) {
+  .milestones-board { grid-template-columns: minmax(0, 1fr); gap: 25px; }
+  .coding-column { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 23px; }
+  .coding-paper { transform: none; }
+  .scholarship-note { margin-top: 16px; }
+  .placement-pair p { flex-direction: row; align-items: center; gap: 11px; }
+  .milestone-event-line { display: flex; }
+}
+@media (max-width: 560px) {
+  .achievements-section { margin: 57px 3px 0; }
+  .achievements-heading h3 { font-size: 30px; }
+  .achievements-heading>p { font-size: 11px; max-width: 275px; }
+  .contest-paper { padding: 28px 23px; transform: none; }
+  .milestone-paper-title { font-size: 25px; }
+  .milestone-event h5, .milestone-list h5 { font-size: 12px; }
+  .placement-pair { gap: 17px; }
+  .placement-pair p { flex-direction: column; align-items: flex-start; gap: 5px; }
+  .placement-pair strong { font-size: 38px; }
+  .placement-pair p>span { font-size: 10px; }
+  .milestone-event-line { display: block; }
+  .milestone-year { font-size: 10px; }
+  .milestone-description { font-size: 11px; }
+  .milestone-list { gap: 23px; }
+  .coding-column { grid-template-columns: minmax(0, 1fr); padding-top: 0; }
+  .coding-paper { padding: 28px 25px; }
+  .coding-distinction { font-size: 23px; }
+  .coding-profile-list { gap: 25px; }
+  .scholarship-note { margin: 0 5px; }
+  .profile-milestones { font-size: 10px; }
+  .project-gallery-controls { gap: 5px; }
+  .project-gallery-controls button { padding: 7px 8px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coding-profile:hover .coding-profile-heading>svg { transform: none; }
+}

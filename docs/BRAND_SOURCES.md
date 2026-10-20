@@ -69,3 +69,17 @@ The portfolio owner supplied consistent square LinkedIn exports for Samsung Rese
 ## Refresh behavior
 
 The Simple Icons version is pinned. Official project sources use their current default branch and avatars use their current public account image, so refreshing intentionally updates those snapshots. Review source changes before committing refreshed assets. The checked-in website does not depend on these upstream URLs.
+
+## Coding profiles and milestones
+
+These compact marks use Simple Icons (CC0-1.0) with muted brand colors on a light surface. The marks identify platforms and events; they do not imply endorsement.
+
+| Mark | Source snapshot | Local asset |
+| --- | --- | --- |
+| LeetCode | [Simple Icons 15.16.0](https://github.com/simple-icons/simple-icons/blob/15.16.0/icons/leetcode.svg) | /assets/brands/achievement-leetcode.svg |
+| Codeforces | [Simple Icons 15.16.0](https://github.com/simple-icons/simple-icons/blob/15.16.0/icons/codeforces.svg) | /assets/brands/achievement-codeforces.svg |
+| CodeChef | [Simple Icons 15.16.0](https://github.com/simple-icons/simple-icons/blob/15.16.0/icons/codechef.svg) | /assets/brands/achievement-codechef.svg |
+| Goldman Sachs | [Simple Icons 15.16.0](https://github.com/simple-icons/simple-icons/blob/15.16.0/icons/goldmansachs.svg) | /assets/brands/achievement-goldmansachs.svg |
+| Flipkart | [Simple Icons 15.16.0](https://github.com/simple-icons/simple-icons/blob/15.16.0/icons/flipkart.svg) | /assets/brands/achievement-flipkart.svg |
+| Adobe | [Simple Icons 13.0.0](https://github.com/simple-icons/simple-icons/blob/13.0.0/icons/adobe.svg) | /assets/brands/achievement-adobe.svg |
+| Amazon | [Simple Icons 13.0.0](https://github.com/simple-icons/simple-icons/blob/13.0.0/icons/amazon.svg) | /assets/brands/achievement-amazon.svg |

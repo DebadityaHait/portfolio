@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { ArrowUpRight, ArrowRight, ArrowDown, GithubLogo, LinkedinLogo, EnvelopeSimple, Sun, Moon, GitMerge, GitPullRequest, Code, ArrowSquareOut, X, MagnifyingGlass, Check, Copy, ArrowUp, GraduationCap, Flask } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowRight, ArrowDown, GithubLogo, LinkedinLogo, EnvelopeSimple, Sun, Moon, GitMerge, GitPullRequest, Code, ArrowSquareOut, X, MagnifyingGlass, Check, Copy, ArrowUp, GraduationCap, Flask, Trophy } from '@phosphor-icons/react';
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/600.css';
@@ -16,6 +16,7 @@ import { Doodle } from './components/Sketch';
 import { MusicPanel, MusicSticker } from './components/Music';
 import ContactBanner from './components/ContactBanner';
 import ProjectBoard from './components/ProjectBoard';
+import Achievements from './components/Achievements';
 import './style.css';
 import './desk.css';
 import './widgets.css';
@@ -92,15 +93,25 @@ function ContributionLog({onClose}) {
   </>;
 }
 
+function ProjectGallery({images}) {
+  const [selected,setSelected]=useState(0);
+  const reduced=useReducedMotion();
+  const image=images[selected];
+  return <div className="project-gallery">
+    <motion.img key={image.image} className="project-gallery-image" src={image.image} alt={image.alt} width="1600" height="1000" initial={reduced?false:{opacity:.5}} animate={{opacity:1}} transition={{duration:.2}}/>
+    <div className="project-gallery-controls" role="group" aria-label="Project screenshots">{images.map((item,index)=><button key={item.image} aria-pressed={selected===index} onClick={()=>setSelected(index)}>{item.label}</button>)}</div>
+    <p className="detail-caption" aria-live="polite">{image.caption}</p>
+  </div>;
+}
+
 function ProjectDetail({project,onClose}) {
   return <><div className="dialog-heading"><div><span className="handwritten">{project.category}</span><h2>{project.name}</h2></div><button className="icon-button" aria-label="Close project details" onClick={onClose}><X size={24}/></button></div>
-    <img className={`detail-image detail-${project.id}`} src={project.image} alt={`${project.name} ${project.imageNote.toLowerCase()}`}/>
-    <div className="detail-caption">{project.imageNote}</div>
+    {project.gallery?<ProjectGallery images={project.gallery}/>:<><img className={`detail-image detail-${project.id}`} src={project.image} alt={`${project.name} ${project.imageNote.toLowerCase()}`}/><div className="detail-caption">{project.imageNote}</div></>}
     <p className="detail-lead">{project.details}</p>
     <h3 className="detail-heading">Under the hood</h3>
     <ul className="engineering-list">{project.engineering.map(s=><li key={s}><Check size={18}/><span>{s}</span></li>)}</ul>
     <div className="detail-note">{project.note}</div>
-    <div className="detail-links">{project.live&&<a href={project.live} {...external} className="solid-button">Explore the project <ArrowUpRight size={17}/></a>}{project.repo&&<a href={project.repo} {...external} className="text-button"><GithubLogo size={19}/> Source code <ArrowUpRight size={15}/></a>}</div>
+    <div className="detail-links">{project.live&&<a href={project.live} {...external} className="solid-button">{project.liveLabel || 'Explore the project'} <ArrowUpRight size={17}/></a>}{project.repo&&<a href={project.repo} {...external} className="text-button"><GithubLogo size={19}/> Source code <ArrowUpRight size={15}/></a>}</div>
   </>;
 }
 
@@ -157,7 +168,7 @@ function App() {
         <div className="profile-paper">
           <Clip className="profile-clip"/>
           <div className="profile-content"><div className="profile-intro handwritten">Hey there, I’m</div><h1>Debaditya Hait<span className="name-period">.</span></h1><p className="profile-role">Software engineer. Open source contributor. Curious by default.</p><div className="profile-note"><span className="note-pin"/><p className="profile-copy">I build across <strong>systems, AI, and the web</strong>. Sometimes that means a new product. Sometimes it’s a small fix in a codebase used by millions.</p><p className="profile-copy secondary-copy">I like understanding how things work, especially when they don’t.</p><Doodle name="scribble" className="profile-note-scribble"/></div>
-          <div className="social-links"><a href={github} {...external}><GithubLogo size={20} weight="bold"/>GitHub<ArrowUpRight size={13}/></a><a href="https://www.linkedin.com/in/debadityahait/" {...external}><LinkedinLogo size={20} weight="bold"/>LinkedIn<ArrowUpRight size={13}/></a><a href={`mailto:${email}`}><EnvelopeSimple size={20}/>Email<ArrowUpRight size={13}/></a></div></div>
+          <div className="social-links"><a href={github} {...external}><GithubLogo size={20} weight="bold"/>GitHub<ArrowUpRight size={13}/></a><a href="https://www.linkedin.com/in/debadityahait/" {...external}><LinkedinLogo size={20} weight="bold"/>LinkedIn<ArrowUpRight size={13}/></a><a href={`mailto:${email}`}><EnvelopeSimple size={20}/>Email<ArrowUpRight size={13}/></a></div><a className="profile-milestones" href="#achievements"><Trophy size={16}/>Contests & coding profiles<ArrowRight size={13}/></a></div>
           <div className="profile-aside"><div className="polaroid"><span className="tape tape-profile"/><span className="photo-pushpin"/><img src="/assets/avatar.jpg" width="400" height="400" alt="Debaditya’s GitHub profile artwork: a reflective compact disc"/><span className="handwritten">always a work in progress :)</span></div><MusicSticker onOpen={()=>setModal({type:'music'})}/><span className="avatar-caption handwritten">the GitHub avatar,<br/>not my actual face.</span></div>
         </div>
         <Calendar/>
@@ -187,6 +198,7 @@ function App() {
       <section id="background" className="background-section"><Doodle name="cube" className="background-cube"/><SectionTitle id="background-heading" note="A bit of research, a lot of learning, and a habit of building.">How I got here</SectionTitle>
         <div className="background-grid"><div className="background-paper"><span className="tape"/><h3><Flask size={22}/> Research & experience</h3><div className="experience-entry"><div className="institution-heading"><InstitutionLogo name="samsung"/><div><div className="experience-date">APR - SEP 2025</div><h4>Samsung R&D Institute India</h4><span className="experience-role">PRISM Research Intern</span></div></div><p>Worked on prompt injection and jailbreak detection with ModernBERT. Fine-tuned an encoder classifier on 75,000+ augmented prompts.</p><span className="research-tag">AI safety & LLM guardrails</span></div><div className="experience-entry"><div className="institution-heading"><InstitutionLogo name="iitm"/><div><div className="experience-date">JUN - AUG 2025</div><h4>IIT Madras</h4><span className="experience-role">AI Research & Prototyping Intern</span></div></div><p>Explored Alzheimer’s progression modeling with longitudinal MRI and physics-informed neural networks in PyTorch.</p><span className="research-tag">Scientific ML & medical imaging</span></div></div>
         <div className="background-right"><div className="education-note"><h3><GraduationCap size={22}/> Still learning</h3><div className="institution-heading"><InstitutionLogo name="srm"/><div><h4>B.Tech, Computer Science</h4><p>SRM Institute of Science and Technology</p><span>2023 - present</span></div></div><div className="institution-heading"><InstitutionLogo name="iitm"/><div><h4>B.S., Data Science & Applications</h4><p>IIT Madras <span className="online-label">(online)</span></p><span>2024 - present</span></div></div></div><div className="toolbox-note"><h3 className="handwritten">Usually somewhere between…</h3><p>Rust & Python. TypeScript & React.<br/>ML models & the systems around them.</p><div className="toolbox-icons">{[['rust','Rust'],['python','Python'],['typescript','TypeScript'],['react','React'],['pytorch','PyTorch'],['cloudflare','Cloudflare']].map(([icon,name])=><img key={icon} src={`/assets/icons/${icon}.svg`} alt={name} title={name} width="24" height="24"/>)}</div></div></div></div>
+        <Achievements/>
       </section>
 
       <ContactBanner linkedin={linkedin} email={email} copied={copied} onCopy={copyEmail}/>
