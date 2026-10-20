@@ -1,3 +1,5 @@
+import { starterScores } from './starterScores.js';
+
 const json = (value, status = 200, extra = {}) => Response.json(value, {
   status,
   headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...extra },
@@ -15,7 +17,39 @@ async function leaderboard(env) {
   return result.results.map((row, index) => ({ rank: index + 1, nickname: row.nickname, score: row.score }));
 }
 
-async function saveScore(request, env) {
+function boardKeys(request) {
+  const origin = new URL(request.url).origin;
+  return { fresh: new Request(`${origin}/__cache/dino-board-v1`), last: new Request(`${origin}/__cache/dino-board-last-v1`) };
+}
+
+function cacheBoard(request, scores, ctx) {
+  const { fresh, last } = boardKeys(request), cache = caches.default;
+  ctx.waitUntil(Promise.all([
+    cache.put(fresh, json({ scores, sharingAvailable: true }, 200, { 'Cache-Control': 'public, max-age=60' })),
+    cache.put(last, json({ scores }, 200, { 'Cache-Control': 'public, max-age=86400' })),
+  ]).catch(() => {}));
+}
+
+async function readBoard(request, env, ctx) {
+  const { fresh, last } = boardKeys(request), cache = caches.default;
+  const cached = await cache.match(fresh).catch(() => null);
+  if (cached) return json(await cached.json());
+  try {
+    const scores = await leaderboard(env);
+    cacheBoard(request, scores, ctx);
+    return json({ scores, sharingAvailable: true });
+  } catch {
+    // A recent successful board remains useful when the database is offline.
+    // The initial challengers are the fallback before the first cached read.
+    const previous = await cache.match(last).catch(() => null);
+    const scores = previous ? (await previous.json()).scores : starterScores;
+    const payload = { scores, sharingAvailable: false };
+    ctx.waitUntil(cache.put(fresh, json(payload, 200, { 'Cache-Control': 'public, max-age=60' })).catch(() => {}));
+    return json(payload);
+  }
+}
+
+async function saveScore(request, env, ctx) {
   const origin = request.headers.get('Origin');
   if (origin !== new URL(request.url).origin || request.headers.get('Sec-Fetch-Site') === 'cross-site') {
     return json({ error: 'Please submit from the game on this site.' }, 403);
@@ -50,7 +84,9 @@ async function saveScore(request, env) {
     best_score = MAX(dino_scores.best_score, excluded.best_score), updated_at = excluded.updated_at
     WHERE dino_scores.updated_at <= excluded.updated_at - 10`).bind(id, nickname, input.score, now).run();
   const secure = new URL(request.url).protocol === 'https:' ? '; Secure' : '';
-  return json({ scores: await leaderboard(env) }, 200, {
+  const scores = await leaderboard(env);
+  cacheBoard(request, scores, ctx);
+  return json({ scores, sharingAvailable: true }, 200, {
     'Set-Cookie': `dino_visitor=${id}; Path=/api/dino; HttpOnly; SameSite=Lax; Max-Age=31536000${secure}`,
   });
 }
@@ -114,12 +150,11 @@ export default {
     try {
       if (path === '/api/music/recent' && request.method === 'GET') return await recentMusic(request, env, ctx);
       if (path === '/api/dino/leaderboard' && request.method === 'GET') {
-        if (!env.DB) return json({ error: 'The scoreboard is taking a break.' }, 503);
-        return json({ scores: await leaderboard(env) });
+        return await readBoard(request, env, ctx);
       }
       if (path === '/api/dino/scores' && request.method === 'POST') {
         if (!env.DB) return json({ error: 'Your score is saved on this device. The shared board is taking a break.' }, 503);
-        return await saveScore(request, env);
+        return await saveScore(request, env, ctx);
       }
       if (['/api/music/recent', '/api/dino/leaderboard', '/api/dino/scores'].includes(path)) {
         return json({ error: 'Method not allowed.' }, 405, { Allow: path.endsWith('/scores') ? 'POST' : 'GET' });
@@ -127,6 +162,7 @@ export default {
       return json({ error: 'Not found.' }, 404);
     } catch {
       // Do not log upstream URLs: the Last.fm API key is a query parameter.
+      if (path === '/api/dino/scores') return json({ error: 'The shared board is temporarily unavailable. Your run is saved in this tab; try sharing again later.' }, 503);
       return json({ error: 'This feature is taking a break. Please try again shortly.' }, 503);
     }
   },

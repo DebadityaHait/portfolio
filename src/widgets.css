@@ -156,6 +156,7 @@ body:has(.contact-paper:not([data-game-phase='contact'])) { overflow-anchor:none
 .game-controls .paper-button { width:auto; background:transparent; box-shadow:none; }
 .game-controls kbd { font:9px ui-monospace,Consolas,monospace; opacity:.7; }
 .game-controls .icon-button { color:var(--ink); }
+.board-notice { color:var(--muted); font-size:11px; line-height:1.7; margin-bottom:12px; }
 .leaderboard>summary { list-style:none; display:flex; align-items:center; gap:9px; width:fit-content; font-size:12px; cursor:pointer; padding:3px 0; }
 .leaderboard>summary::-webkit-details-marker { display:none; }
 .leaderboard>summary>svg:first-child { color:var(--accent); }

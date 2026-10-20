@@ -50,6 +50,7 @@ export default function DinoGame({ phase, onPrepared, onFailure, onBack }) {
   const [nickname, setNickname] = useState(readNickname);
   const [board, setBoard] = useState([]);
   const [boardState, setBoardState] = useState('loading');
+  const [sharingAvailable, setSharingAvailable] = useState(true);
   const [submission, setSubmission] = useState('idle');
   const [message, setMessage] = useState('');
   const [boardRetry, setBoardRetry] = useState(0);
@@ -104,7 +105,7 @@ export default function DinoGame({ phase, onPrepared, onFailure, onBack }) {
     fetch('/api/dino/leaderboard', { signal: controller.signal }).then(async response => {
       const data = await response.json();
       if (!response.ok || !Array.isArray(data.scores)) throw new Error('Unavailable');
-      setBoard(data.scores); setBoardState('ready');
+      setBoard(data.scores); setBoardState('ready'); setSharingAvailable(data.sharingAvailable !== false);
     }).catch(error => { if (error.name !== 'AbortError') setBoardState('unavailable'); });
     return () => controller.abort();
   }, [boardRetry]);
@@ -175,7 +176,7 @@ export default function DinoGame({ phase, onPrepared, onFailure, onBack }) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Could not share that score. Try again.');
-      setBoard(data.scores); setBoardState('ready'); setSubmission('idle');
+      setBoard(data.scores); setBoardState('ready'); setSharingAvailable(true); setSubmission('idle');
       if (pendingRef.current <= sharedScore) {
         pendingRef.current = null; setPendingScore(null); storePending(null);
       }
@@ -202,6 +203,7 @@ export default function DinoGame({ phase, onPrepared, onFailure, onBack }) {
         {pendingScore > 0 && <form className="score-form" onSubmit={submit}><label htmlFor="dino-nickname">Put your best unshared run on the board</label><div><input id="dino-nickname" name="nickname" value={nickname} maxLength={20} required placeholder="Your nickname" autoComplete="nickname" onChange={event => { setNickname(event.target.value); try { localStorage.setItem('dino-nickname', event.target.value); } catch {} }} aria-describedby="score-help"/><button className="solid-button" disabled={submission === 'sending'}>{submission === 'sending' ? 'Sharing…' : `Share ${pendingScore} points`}</button></div><small id="score-help">Your nickname and score will be public. Your unshared best stays safe in this tab.</small></form>}
         {message && <p className={`score-message ${submission === 'error' ? 'error' : ''}`} role="status">{message}</p>}
         <details className="leaderboard"><summary><Trophy size={18}/><span>The score to beat</span><CaretDown size={15}/></summary><div className="leaderboard-heading"><span>Shared top ten</span><button className="icon-button" aria-label="Refresh leaderboard" onClick={() => setBoardRetry(n => n + 1)} disabled={boardState === 'loading'}><ArrowClockwise size={17}/></button></div>
+          {boardState === 'ready' && !sharingAvailable && <p className="board-notice" role="status">Updates are taking a break. Your unshared run stays safe in this tab.</p>}
           {boardState === 'loading' ? <p role="status">Fetching the board…</p> : boardState === 'unavailable' ? <p role="status">The shared board is taking a break. Your personal best stays on this device.</p> : board.length ? <ol>{board.map(row => <li key={row.rank}><span className="leaderboard-rank">{String(row.rank).padStart(2, '0')}</span><span>{row.nickname}</span><strong>{row.score.toLocaleString()}</strong></li>)}</ol> : <div className="leaderboard-empty"><p className="handwritten">Set the score to beat.</p><small>Share a run to join the board.</small></div>}
         </details>
         <p className="game-credit">Chromium’s runner, via <a href="https://github.com/Soheilexe/Chrome-Dino" target="_blank" rel="noopener noreferrer">Soheilexe/Chrome-Dino</a> · <a href="/licenses/t-rex-runner.txt" target="_blank" rel="noopener noreferrer">BSD 3-Clause</a></p>

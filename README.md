@@ -55,6 +55,8 @@ Set `LASTFM_USERNAME` in Wrangler vars. Local `.dev.vars` values are not uploade
 
 D1 migrations create the leaderboard and add four initial challengers. Each browser guest has one best shared score. Submissions use same-origin validation, nickname/score checks and rate limiting. This casual client-scored game is not cheat-proof. IP addresses are not stored in D1.
 
+Leaderboard reads are cached at the edge for 60 seconds. If D1 is unavailable, the board shows its last cached scores (up to a day old), or the initial challengers when no cache exists. The API reports `sharingAvailable: false`; the interface explains that updates are temporarily unavailable. Pending runs remain in the visitor’s tab for a later retry.
+
 ## APIs
 
 | Route | Response |
