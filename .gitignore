@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+.sites/
+.playwright-cli/
+reference.html
+reference.css
+research/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+!.env.example
+
+# Local tools and private working artifacts
+.openai/
+.unsnooze/

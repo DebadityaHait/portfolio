@@ -1,0 +1,205 @@
+/* Layers: page 2, floating desk tools 6–8, navigation 40, native dialogs top layer. */
+.blade-tip { position:absolute; left:1%; top:99%; width:0; height:0; pointer-events:none; }
+.brand-icon { background: #fffdf8; border-color: color-mix(in srgb,var(--brand) 27%,#ddd); box-shadow: 1px 2px 0 color-mix(in srgb,var(--brand) 18%,transparent); }
+.brand-icon img, [data-theme=dark] .brand-icon img { opacity:1; filter:none; object-fit:contain; }
+.brand-icon.brand-ruff { background:#293428; border-color:#8da245; }
+.repo-name { overflow-wrap:anywhere; min-width:0; }
+.card-tags { flex-wrap:wrap; row-gap:8px; }
+.institution-heading { display:flex; align-items:center; gap:13px; }
+.institution-heading>div { min-width:0; }
+.institution-logo { flex:0 0 52px; height:52px; display:grid; place-items:center; padding:0; }
+.institution-logo img { width:100%; height:100%; object-fit:contain; border-radius:3px; }
+.education-note .institution-heading { align-items:flex-start; }
+.education-note .institution-heading+div { margin-top:23px; }
+.education-note .institution-heading>div>span { font-size:10px; color:var(--muted); }
+.toolbox-icons { flex-wrap:wrap; gap:23px; }
+.toolbox-icons>img { opacity:.8; filter:invert(.87) sepia(.2); width:24px; height:24px; object-fit:contain; }
+
+/* Headphones have their own space below the photo, with a native dialog popup. */
+.music-dock { position:relative; display:flex; align-items:center; justify-content:center; gap:9px; margin-top:32px; min-height:103px; }
+.music-dock .headphones { position:relative; inset:auto; width:96px; height:auto; flex-shrink:0; display:block; padding:0; border:0; background:none; cursor:pointer; transform:none; pointer-events:auto; }
+.music-trigger>img { width:100%; height:auto; filter:drop-shadow(2px 5px 3px #10203255); }
+.music-dock-caption { color:var(--chalk); font-size:19px; line-height:1.15; max-width:103px; transform:rotate(-5deg); }
+.music-dock-caption svg { display:block; margin-top:5px; transform:rotate(-90deg); }
+.music-dialog { width:min(540px,calc(100% - 32px)); }
+.music-placeholder { min-height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; color:var(--muted); font-size:13px; line-height:1.7; }
+.music-placeholder h3 { color:var(--ink); font-size:17px; }
+.music-placeholder .text-button { color:var(--accent); display:flex; align-items:center; gap:6px; background:none; }
+.current-track { display:flex; gap:20px; align-items:center; background:var(--paper-raised); padding:20px; border:1px solid var(--border); border-radius:3px; margin-top:24px; }
+.current-track>div { min-width:0; }
+.album-cover { width:112px; height:112px; flex:0 0 112px; display:grid; place-items:center; background:color-mix(in srgb,var(--accent) 12%,var(--paper)); color:var(--accent); border-radius:2px; overflow:hidden; box-shadow:2px 3px 0 var(--shadow); }
+.album-cover img { width:100%; height:100%; object-fit:cover; }
+.track-status { display:flex; align-items:center; gap:6px; font-size:10px; color:var(--accent); margin-bottom:8px; text-transform:uppercase; letter-spacing:.7px; }
+.current-track h3 { font-size:19px; line-height:1.3; margin-bottom:7px; overflow-wrap:anywhere; }
+.current-track a:hover { text-decoration:underline; text-underline-offset:3px; }
+.current-track p { font-size:13px; color:var(--muted); }
+.current-track small, .current-track time { display:block; color:var(--muted); font-size:10px; line-height:1.5; margin-top:6px; }
+.playing-indicator { display:inline-block; width:7px; height:7px; border-radius:50%; background:#38825c; }
+@media(prefers-reduced-motion:no-preference) { .playing-indicator { animation:music-pulse 1.5s ease-in-out infinite; } }
+@keyframes music-pulse { 50% { opacity:.35; transform:scale(.75); } }
+.recent-tracks { margin-top:25px; }
+.recent-tracks>h3 { font-size:24px; font-weight:400; color:var(--accent); margin-bottom:10px; }
+.recent-track { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px dashed var(--border); }
+.album-cover.small { width:39px; height:39px; flex-basis:39px; box-shadow:none; }
+.recent-track>span:not(.album-cover) { flex:1; min-width:0; }
+.recent-track strong { display:block; font-size:12px; font-weight:500; overflow-wrap:anywhere; }
+.recent-track small { display:block; font-size:10px; color:var(--muted); margin-top:3px; }
+.recent-track>svg { flex-shrink:0; color:var(--accent); }
+.music-profile { display:flex; align-items:center; gap:7px; width:fit-content; margin-top:22px; color:var(--accent); }
+
+.extra-stickers { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.extra-stickers>img { position:absolute; width:123px; height:auto; filter:drop-shadow(3px 8px 3px #0e1d2e55); }
+.sushi-sticker { top:1730px; left:calc(50% - 662px); transform:rotate(-15deg); }
+.shoes-sticker { top:3060px; right:calc(50% - 669px); transform:rotate(18deg); }
+@media(max-width:1359px) { .extra-stickers { display:none; } }
+
+/* The game bundle and sprites are requested only after opening the dinosaur. */
+.game-trigger,.game-screen { --game-ink:#794b35; }
+[data-theme='dark'] .game-trigger,[data-theme='dark'] .game-screen { --game-ink:#edb68c; }
+.game-trigger { display:block; cursor:pointer; padding:0; border:0; background:none; height:auto; aspect-ratio:44/47; transform:rotate(8deg); transition:none; }
+.game-trigger:disabled { opacity:1; }
+.game-trigger>img { width:100%; height:auto; pointer-events:none; filter:drop-shadow(2px 6px 2px #14263744); }
+.game-trigger>canvas { display:block; width:100%; height:auto; image-rendering:pixelated; pointer-events:none; filter:drop-shadow(2px 6px 2px #14263744); }
+.game-trigger>canvas[hidden] { display:none; }
+.game-scorebar { display:flex; align-items:center; justify-content:space-between; margin:24px 0 12px; }
+.game-scorebar>span:first-child { font-size:9px; letter-spacing:1px; color:var(--muted); }
+.game-scorebar strong { font:600 21px ui-monospace,Consolas,monospace; margin-left:8px; letter-spacing:0; color:var(--ink); }
+.game-scorebar .handwritten { font-size:23px; color:var(--accent); transform:rotate(3deg); }
+.game-screen { position:relative; width:100%; height:166px; background:transparent; border:0; overflow:hidden; touch-action:none; cursor:pointer; }
+.game-screen>[data-sprite] { display:none; }
+.game-screen .runner-container { position:relative; width:100%; height:150px; margin:7px auto; overflow:hidden; }
+.game-screen .runner-canvas { display:block; max-width:100%; height:150px; image-rendering:pixelated; }
+.runner-player-marker { position:absolute; pointer-events:none; visibility:hidden; }
+.game-screen:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.game-hint { font-size:11px; color:var(--muted); line-height:1.6; min-height:18px; margin:12px 0; }
+.game-controls { display:flex; gap:10px; align-items:center; }
+.game-controls .paper-button { border:1px solid var(--border); padding:9px 13px; font-size:11px; touch-action:none; }
+.game-controls .icon-button { background:transparent; }
+button:disabled { opacity:.5; cursor:default; }
+.score-form { border:1px dashed var(--border); padding:17px; background:var(--paper-raised); margin-top:24px; }
+.score-form label { display:block; font-size:12px; font-weight:600; margin-bottom:10px; }
+.score-form>div { display:flex; gap:9px; }
+.score-form input { min-width:0; width:100%; color:var(--ink); background:var(--paper); border:1px solid var(--border); border-radius:3px; padding:10px 12px; font:inherit; font-size:12px; }
+.score-form>small { display:block; margin-top:9px; color:var(--muted); font-size:10px; line-height:1.6; }
+.score-message { font-size:11px; color:var(--accent); line-height:1.6; margin-top:8px; }
+.score-message:empty { display:none; }
+.score-message.error { color:var(--ink); }
+.leaderboard { margin-top:28px; border-top:1px dashed var(--border); padding-top:19px; }
+.leaderboard-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.leaderboard-heading { font-size:10px; color:var(--muted); margin-top:10px; }
+.leaderboard>p { padding:20px 0; font-size:12px; line-height:1.7; color:var(--muted); }
+.leaderboard ol { list-style:none; margin:10px 0 0; padding:0; }
+.leaderboard li { display:flex; align-items:center; gap:14px; padding:11px 7px; font-size:12px; border-bottom:1px dashed var(--border); }
+.leaderboard li>span:nth-child(2) { overflow-wrap:anywhere; }
+.leaderboard li:first-child { background:color-mix(in srgb,var(--accent) 8%,var(--paper)); }
+.leaderboard-rank { font:11px ui-monospace,Consolas,monospace; color:var(--muted); flex-shrink:0; }
+.leaderboard li strong { margin-left:auto; font:600 14px ui-monospace,Consolas,monospace; }
+.leaderboard-empty { padding:22px 0; text-align:center; }
+.leaderboard-empty .handwritten { font-size:25px; color:var(--accent); }
+.leaderboard-empty small { display:block; margin-top:7px; color:var(--muted); font-size:11px; }
+.game-credit { color:var(--muted); font-size:9px; line-height:1.7; margin-top:22px; }
+.game-credit a { text-decoration:underline; text-underline-offset:2px; }
+@media(max-width:800px) { .music-dock { margin-top:25px; min-height:86px; } .music-dock .headphones { width:80px; } .music-dock-caption { font-size:16px; } }
+@media(max-width:560px) {
+  .music-dock { flex-direction:column; margin-top:20px; gap:4px; min-height:0; }
+  .music-dock .headphones { width:63px; }
+  .music-dock-caption { font-size:14px; max-width:105px; text-align:center; }
+  .music-dock-caption svg { display:none; }
+  .profile-note { margin-top:25px; }
+  .institution-heading { gap:10px; }
+  .institution-logo { flex-basis:44px; height:44px; }
+  .education-note .institution-heading h4 { font-size:12px; }
+  .education-note .institution-heading p { font-size:11px; }
+  .current-track { gap:14px; padding:15px; }
+  .album-cover { width:83px; height:83px; flex-basis:83px; }
+  .current-track h3 { font-size:16px; }
+  .current-track p { font-size:12px; }
+  .score-form>div { flex-direction:column; }
+  .score-form .solid-button { width:100%; }
+  .game-scorebar .handwritten { font-size:20px; }
+  .game-controls { gap:7px; }
+  .game-controls .paper-button { padding:9px 10px; }
+  .game-hint { font-size:10px; }
+}
+/* The contact paper is also the game surface. Its native dialog stays mounted on expansion. */
+.contact-section,footer { overflow-anchor:none; }
+body:has(.contact-paper:not([data-game-phase='contact'])) { overflow-anchor:none; }
+.contact-paper { transition:height .4s cubic-bezier(.22,.8,.3,1); transform-origin:top left; }
+.contact-rest { position:relative; transition:opacity .2s; }
+.contact-actions { flex-wrap:wrap; }
+.contact-linkedin { display:inline-flex; align-items:center; gap:7px; color:var(--accent); font-size:12px; padding:8px 0; }
+.contact-linkedin:hover { text-decoration:underline; text-underline-offset:4px; }
+.contact-play { position:absolute; top:44px; left:47px; right:47px; min-width:0; }
+.contact-paper[data-game-phase='loading'] .contact-play,
+.contact-paper[data-game-phase='leaving'] .contact-play { opacity:0; visibility:hidden; pointer-events:none; }
+.contact-paper[data-game-phase='entering'] .contact-rest,
+.contact-paper[data-game-phase='game'] .contact-rest { opacity:0; pointer-events:none; }
+.contact-paper[data-game-phase='entering'] .contact-play { animation:game-content-in .4s ease-out both; }
+.contact-paper[data-game-phase='leaving'] .contact-rest { animation:game-content-in .35s ease-out both; }
+.contact-paper .game-trigger { z-index:3; }
+.contact-paper[data-game-phase='entering'] .dino-caption,
+.contact-paper[data-game-phase='game'] .dino-caption { opacity:0; }
+.dino-caption { transition:opacity .2s; }
+.game-load-note { position:absolute; top:100%; left:0; font-size:11px; color:var(--muted); margin-top:8px; }
+.game-load-note button { background:none; color:var(--accent); text-decoration:underline; text-underline-offset:3px; padding:3px 5px; }
+.inline-game-slot { width:100%; }
+.contact-game-dialog { display:none; position:relative; margin:0; padding:0; inset:auto; width:100%; max-width:none; max-height:none; color:var(--ink); background:transparent; border:0; overflow:visible; transform-origin:top left; }
+.contact-game-dialog[open] { display:block; }
+.contact-game-dialog .dino-game { width:100%; }
+.game-heading { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+.game-heading>.handwritten { font-size:27px; color:var(--accent); }
+.game-back, .game-expand { display:inline-flex; align-items:center; gap:7px; background:none; color:var(--muted); font-size:11px; padding:5px 0; }
+.game-back:hover, .game-expand:hover { color:var(--ink); }
+.game-under-track { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.game-under-track .game-hint { margin:0; }
+.game-under-track .game-controls { flex-shrink:0; }
+.game-controls .paper-button { width:auto; background:transparent; box-shadow:none; }
+.game-controls kbd { font:9px ui-monospace,Consolas,monospace; opacity:.7; }
+.game-controls .icon-button { color:var(--ink); }
+.leaderboard>summary { list-style:none; display:flex; align-items:center; gap:9px; width:fit-content; font-size:12px; cursor:pointer; padding:3px 0; }
+.leaderboard>summary::-webkit-details-marker { display:none; }
+.leaderboard>summary>svg:first-child { color:var(--accent); }
+.leaderboard>summary>svg:last-child { margin-left:8px; transition:transform .2s; }
+.leaderboard[open]>summary>svg:last-child { transform:rotate(180deg); }
+.offline-runner-live-region { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.game-expanded { overflow:hidden; }
+.contact-game-dialog[data-expanded='true'] { position:fixed; inset:16px; width:calc(100% - 32px); height:calc(100dvh - 32px); max-height:none; margin:0; padding:clamp(24px,4vw,58px); overflow:auto; background-color:var(--paper); background-image:linear-gradient(90deg,transparent 66%,rgba(80,70,47,.025) 66.2%,transparent 66.6%); border-radius:2px; box-shadow:3px 5px 0 var(--shadow); }
+.contact-game-dialog[data-expanded='true']::backdrop { background:rgba(12,24,38,.76); backdrop-filter:blur(5px); }
+.contact-game-dialog[data-expanded='true'] .dino-game { max-width:1100px; margin:0 auto; }
+.contact-game-dialog[data-expanded='true'] .game-heading { margin-bottom:clamp(18px,5dvh,55px); }
+.contact-game-dialog[data-expanded='true'] .game-screen { height:clamp(166px,30dvh,300px); display:flex; align-items:center; }
+.contact-game-dialog[data-expanded='true'] .game-scorebar .handwritten { font-size:30px; }
+@keyframes game-content-in { from { opacity:0; } to { opacity:1; } }
+@media(max-width:800px) {
+  .contact-play { top:33px; left:33px; right:33px; }
+  .game-under-track { align-items:flex-start; flex-direction:column; gap:12px; }
+}
+@media(max-width:560px) {
+  .game-controls kbd { font-size:8px; }
+  .contact-play { top:33px; left:28px; right:28px; }
+  .game-heading { gap:10px; flex-wrap:wrap; }
+  .game-heading>.handwritten { order:3; flex:1 0 100%; font-size:25px; margin-top:8px; }
+  .game-back, .game-expand { font-size:10px; }
+  .game-scorebar { margin-top:14px; }
+  .game-under-track .game-controls { flex-wrap:wrap; }
+  .contact-game-dialog[data-expanded='true'] { inset:8px; width:calc(100% - 16px); height:calc(100dvh - 16px); padding:23px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .contact-paper,.contact-rest,.dino-caption { transition:none; }
+  .contact-paper .contact-play,.contact-paper .game-screen,.contact-paper .contact-rest { animation:none!important; }
+}
+/* Shared clothesline geometry. Clip art is cropped, never squeezed. */
+.anchored-board { position:relative; padding-top:72px; gap:92px 36px; }
+.project-lines { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:0; }
+.project-slot { position:relative; min-width:0; z-index:1; }
+.project-slot>.project-card { height:100%; transform-origin:50% 0; }
+.project-peg { position:absolute; width:52px; height:96px; top:-58px; left:50%; transform:translateX(-50%); z-index:4; pointer-events:none; }
+.project-peg>img { width:100%; height:100%; object-fit:cover; object-position:50% 0; filter:drop-shadow(0 3px 3px #14263755); }
+@media(max-width:800px) {
+  .anchored-board { gap:84px 27px; }
+}
+@media(max-width:560px) {
+  .anchored-board { padding-top:64px; gap:82px; }
+  .project-peg { width:45.5px; height:84px; top:-51px; }
+  .game-controls { flex-wrap:wrap; }
+}

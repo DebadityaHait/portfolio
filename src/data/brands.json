@@ -1,0 +1,294 @@
+{
+  "repos": {
+    "ansible/ansible": {
+      "name": "Ansible Automation",
+      "src": "/assets/brands/ansible.svg",
+      "color": "#EE0000",
+      "source": "https://www.ansible.com/logos"
+    },
+    "apache/datafusion-ballista": {
+      "name": "Apache DataFusion Ballista Distributed Query Engine",
+      "src": "/assets/brands/apache-datafusion-ballista.svg",
+      "color": "#D22128",
+      "source": "https://raw.githubusercontent.com/apache/datafusion-ballista/HEAD/docs/source/_static/images/ballista-logo.svg"
+    },
+    "apache/datafusion-comet": {
+      "name": "Apache DataFusion Comet",
+      "src": "/assets/brands/apache-datafusion-comet.svg",
+      "color": "#EF6820",
+      "source": "https://raw.githubusercontent.com/apache/datafusion-comet/HEAD/docs/source/_static/images/logo_original.svg"
+    },
+    "apple/coremltools": {
+      "name": "Apple Core ML Tools",
+      "src": "/assets/brands/apple.svg",
+      "color": "#000000",
+      "source": "https://www.apple.com/"
+    },
+    "astral-sh/ruff": {
+      "name": "Astral Ruff Python Linter Core",
+      "src": "/assets/brands/ruff.svg",
+      "color": "#D7FF64",
+      "source": "https://astral.sh/ruff"
+    },
+    "astral-sh/uv": {
+      "name": "Astral uv",
+      "src": "/assets/brands/uv.svg",
+      "color": "#DE5FE9",
+      "source": "https://docs.astral.sh/uv/"
+    },
+    "aws-powertools/powertools-lambda-python": {
+      "name": "AWS Powertools for AWS Lambda Python",
+      "src": "/assets/brands/aws-powertools-powertools-lambda-python.png",
+      "color": "#FF9900",
+      "source": "https://github.com/aws-powertools"
+    },
+    "aws/aws-lambda-rust-runtime": {
+      "name": "AWS Lambda Rust Runtime",
+      "src": "/assets/brands/aws-aws-lambda-rust-runtime.png",
+      "color": "#FF9900",
+      "source": "https://github.com/aws"
+    },
+    "CERN/TIGRE": {
+      "name": "CERN TIGRE",
+      "src": "/assets/brands/cern-tigre.png",
+      "color": "#0053A1",
+      "source": "https://github.com/CERN"
+    },
+    "cloudflare/workers-sdk": {
+      "name": "Cloudflare Workers SDK",
+      "src": "/assets/brands/cloudflare.svg",
+      "color": "#F38020",
+      "source": "https://www.cloudflare.com/"
+    },
+    "deepset-ai/haystack-core-integrations": {
+      "name": "Deepset Haystack AI Framework",
+      "src": "/assets/brands/deepset-ai-haystack-core-integrations.png",
+      "color": "#009B9B",
+      "source": "https://github.com/deepset-ai"
+    },
+    "delta-io/delta-rs": {
+      "name": "Delta Lake Rust Core",
+      "src": "/assets/brands/delta-io-delta-rs.svg",
+      "color": "#00ADD4",
+      "source": "https://raw.githubusercontent.com/delta-io/delta-rs/HEAD/docs/delta-rust-no-whitespace.svg"
+    },
+    "denoland/deno": {
+      "name": "Deno Runtime Core",
+      "src": "/assets/brands/deno.svg",
+      "color": "#000000",
+      "source": "https://deno.com/"
+    },
+    "docling-project/docling": {
+      "name": "IBM / DS3 Docling Document Processing",
+      "src": "/assets/brands/docling-project-docling.svg",
+      "color": "#0062FF",
+      "source": "https://raw.githubusercontent.com/docling-project/docling/HEAD/docs/assets/logo.svg"
+    },
+    "electron/electron": {
+      "name": "Electron Framework Core",
+      "src": "/assets/brands/electron.svg",
+      "color": "#47848F",
+      "source": "https://www.electronjs.org/"
+    },
+    "getsentry/sentry-cli": {
+      "name": "Sentry CLI",
+      "src": "/assets/brands/sentry.svg",
+      "color": "#362D59",
+      "source": "https://sentry.io/branding/"
+    },
+    "google-deepmind/mujoco": {
+      "name": "Google DeepMind MuJoCo",
+      "src": "/assets/brands/google-deepmind-mujoco.png",
+      "color": "#4285F4",
+      "source": "https://github.com/google-deepmind"
+    },
+    "Graphify-Labs/graphify": {
+      "name": "Graphify Knowledge Graph Engine",
+      "src": "/assets/brands/graphify-labs-graphify.jpg",
+      "color": "#118D4F",
+      "source": "https://github.com/Graphify-Labs"
+    },
+    "GreptimeTeam/greptimedb": {
+      "name": "GreptimeDB",
+      "src": "/assets/brands/greptimeteam-greptimedb.png",
+      "color": "#29B6A8",
+      "source": "https://github.com/GreptimeTeam"
+    },
+    "huggingface/accelerate": {
+      "name": "Hugging Face Accelerate",
+      "src": "/assets/brands/huggingface.svg",
+      "color": "#FFD21E",
+      "source": "https://huggingface.co/brand"
+    },
+    "huggingface/transformers": {
+      "name": "Hugging Face Transformers",
+      "src": "/assets/brands/huggingface.svg",
+      "color": "#FFD21E",
+      "source": "https://huggingface.co/brand"
+    },
+    "kubernetes/kubernetes": {
+      "name": "Kubernetes Container Orchestration",
+      "src": "/assets/brands/kubernetes.svg",
+      "color": "#326CE5",
+      "source": "https://github.com/kubernetes/kubernetes/tree/master/logo"
+    },
+    "microsoft/PowerToys": {
+      "name": "Microsoft PowerToys Command Palette",
+      "src": "/assets/brands/microsoft-powertoys.png",
+      "color": "#7055D8",
+      "source": "https://raw.githubusercontent.com/microsoft/PowerToys/HEAD/doc/images/icons/Command%20Palette.png"
+    },
+    "modelcontextprotocol/python-sdk": {
+      "name": "Model Context Protocol Python SDK",
+      "src": "/assets/brands/modelcontextprotocol.svg",
+      "color": "#000000",
+      "source": "https://github.com/modelcontextprotocol/modelcontextprotocol"
+    },
+    "mui/material-ui": {
+      "name": "MUI Material-UI Ecosystem",
+      "src": "/assets/brands/mui.svg",
+      "color": "#007FFF",
+      "source": "https://mui.com/"
+    },
+    "neovim/neovim": {
+      "name": "Neovim Editor Core",
+      "src": "/assets/brands/neovim.svg",
+      "color": "#57A143",
+      "source": "https://neovim.io/"
+    },
+    "NousResearch/hermes-agent": {
+      "name": "Hermes Agent",
+      "src": "/assets/brands/nousresearch-hermes-agent.png",
+      "color": "#B88746",
+      "source": "https://github.com/NousResearch"
+    },
+    "nrwl/nx": {
+      "name": "Nx Monorepo Toolkit",
+      "src": "/assets/brands/nx.svg",
+      "color": "#143055",
+      "source": "https://nx.dev"
+    },
+    "nvm-sh/nvm": {
+      "name": "Node Version Manager",
+      "src": "/assets/brands/nvm.svg",
+      "color": "#F4DD4B",
+      "source": "https://github.com/nvm-sh/logos"
+    },
+    "open-telemetry/opentelemetry-python-contrib": {
+      "name": "OpenTelemetry Python Contrib",
+      "src": "/assets/brands/open-telemetry-opentelemetry-python-contrib.svg",
+      "color": "#F5A800",
+      "source": "https://github.com/cncf/artwork/tree/main/projects/opentelemetry"
+    },
+    "open-webui/open-webui": {
+      "name": "Open WebUI",
+      "src": "/assets/brands/open-webui-open-webui.png",
+      "color": "#151515",
+      "source": "https://github.com/open-webui"
+    },
+    "pnpm/pnpm": {
+      "name": "pnpm",
+      "src": "/assets/brands/pnpm.svg",
+      "color": "#F69220",
+      "source": "https://pnpm.io/"
+    },
+    "PostHog/posthog": {
+      "name": "PostHog Analytics Engine",
+      "src": "/assets/brands/posthog-posthog.png",
+      "color": "#F9BD2B",
+      "source": "https://github.com/PostHog"
+    },
+    "pytest-dev/pytest": {
+      "name": "Pytest Test Framework",
+      "src": "/assets/brands/pytest.svg",
+      "color": "#0A9EDC",
+      "source": "https://github.com/pytest-dev/design"
+    },
+    "pytorch/pytorch": {
+      "name": "PyTorch Core Deep Learning Framework",
+      "src": "/assets/brands/pytorch.svg",
+      "color": "#EE4C2C",
+      "source": "https://pytorch.org/"
+    },
+    "ray-project/ray": {
+      "name": "Ray Serve",
+      "src": "/assets/brands/ray.svg",
+      "color": "#028CF0",
+      "source": "https://github.com/ray-project/ray"
+    },
+    "rclone/rclone": {
+      "name": "rclone Cloud Storage Synchronization",
+      "src": "/assets/brands/rclone-rclone.svg",
+      "color": "#3F79AD",
+      "source": "https://raw.githubusercontent.com/rclone/rclone/HEAD/graphics/logo/svg/logo_symbol_color.svg"
+    },
+    "redis/node-redis": {
+      "name": "Official Node Redis Client",
+      "src": "/assets/brands/redis.svg",
+      "color": "#FF4438",
+      "source": "https://redis.io/"
+    },
+    "safetensors/safetensors": {
+      "name": "Hugging Face Safetensors",
+      "src": "/assets/brands/huggingface.svg",
+      "color": "#FFD21E",
+      "source": "https://huggingface.co/brand"
+    },
+    "storybookjs/storybook": {
+      "name": "Storybook Core",
+      "src": "/assets/brands/storybook.svg",
+      "color": "#FF4785",
+      "source": "https://github.com/storybookjs/brand"
+    },
+    "tensorflow/tensorflow": {
+      "name": "Google TensorFlow Core",
+      "src": "/assets/brands/tensorflow.svg",
+      "color": "#FF6F00",
+      "source": "https://www.tensorflow.org/"
+    },
+    "traceroot-ai/traceroot": {
+      "name": "Traceroot AI",
+      "src": "/assets/brands/traceroot-ai-traceroot.png",
+      "color": "#5462EB",
+      "source": "https://github.com/traceroot-ai"
+    },
+    "twentyhq/twenty": {
+      "name": "Twenty Open-Source CRM",
+      "src": "/assets/brands/twentyhq-twenty.svg",
+      "color": "#171717",
+      "source": "https://raw.githubusercontent.com/twentyhq/twenty/HEAD/packages/twenty-website/public/images/core/logo.svg"
+    },
+    "vercel/next.js": {
+      "name": "Vercel Next.js",
+      "src": "/assets/brands/nextdotjs.svg",
+      "color": "#000000",
+      "source": "https://nextjs.org/"
+    },
+    "vitejs/vite": {
+      "name": "Vite Build Tool",
+      "src": "/assets/brands/vitejs-vite.svg",
+      "color": "#9135FF",
+      "source": "https://raw.githubusercontent.com/vitejs/vite/HEAD/docs/public/logo.svg"
+    }
+  },
+  "institutions": {
+    "samsung": {
+      "name": "Samsung R&D Institute India",
+      "src": "/assets/brands/institution-samsung-research.jpg",
+      "color": "#1428A0",
+      "source": "logos/institution-samsung-research.jpg"
+    },
+    "iitm": {
+      "name": "Indian Institute of Technology Madras",
+      "src": "/assets/brands/institution-iit-madras.png",
+      "color": "#A52A2A",
+      "source": "logos/institution-iit-madras.png"
+    },
+    "srm": {
+      "name": "SRM Institute of Science and Technology",
+      "src": "/assets/brands/institution-srmist.png",
+      "color": "#0066A1",
+      "source": "logos/institution-srmist.png"
+    }
+  }
+}
