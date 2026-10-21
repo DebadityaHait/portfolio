@@ -148,6 +148,12 @@ export default {
     const path = new URL(request.url).pathname;
     if (!path.startsWith('/api/')) return env.ASSETS.fetch(request);
     try {
+      if (path === '/api/visitor' && request.method === 'GET') {
+        const local = ['localhost', '127.0.0.1', '[::1]'].includes(new URL(request.url).hostname);
+        const city = !local && typeof request.cf?.city === 'string'
+          ? request.cf.city.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 60) : '';
+        return json({ city }, 200, { 'Cache-Control': 'private, no-store' });
+      }
       if (path === '/api/music/recent' && request.method === 'GET') return await recentMusic(request, env, ctx);
       if (path === '/api/dino/leaderboard' && request.method === 'GET') {
         return await readBoard(request, env, ctx);
@@ -156,7 +162,7 @@ export default {
         if (!env.DB) return json({ error: 'Your score is saved on this device. The shared board is taking a break.' }, 503);
         return await saveScore(request, env, ctx);
       }
-      if (['/api/music/recent', '/api/dino/leaderboard', '/api/dino/scores'].includes(path)) {
+      if (['/api/music/recent', '/api/dino/leaderboard', '/api/dino/scores', '/api/visitor'].includes(path)) {
         return json({ error: 'Method not allowed.' }, 405, { Allow: path.endsWith('/scores') ? 'POST' : 'GET' });
       }
       return json({ error: 'Not found.' }, 404);

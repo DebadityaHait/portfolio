@@ -1,0 +1,65 @@
+.mascot-aside { margin-top: 0; }
+.visitor-mascot { display: flex; flex-direction: column; align-items: center; }
+.visitor-bubble { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 78px; padding: 12px 17px; background: var(--paper); color: var(--ink); border: 1px solid color-mix(in srgb, var(--border) 85%, transparent); border-radius: 16px 16px 16px 4px; box-shadow: 2px 4px 0 var(--shadow), 0 8px 18px #0c1b2c12; }
+.visitor-bubble::after { content: ''; position: absolute; bottom: -7px; left: 46px; width: 13px; height: 13px; background: var(--paper); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: rotate(45deg); }
+.visitor-message { width: 100%; text-align: center; }
+.visitor-title { display: block; font-size: 25px; line-height: 1.2; color: var(--accent); }
+.visitor-detail { display: block; margin-top: 4px; font-size: 11px; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+.visitor-typing { display: flex; align-items: center; gap: 3px; position: absolute; right: 13px; bottom: 9px; }
+.visitor-typing i { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); opacity: .55; }
+.mascot-portrait { width: 230px; height: 230px; margin: 17px 0 -18px; }
+.mascot-portrait .deba-mascot { width: 100% !important; height: 100% !important; border-radius: 12px; }
+.deba-mascot:focus-visible { outline: 2px solid var(--yellow); outline-offset: 5px; }
+.mascot-hint { display: block; color: var(--chalk); font-size: 17px; margin-top: 4px; text-align: center; }
+.mascot-aside .music-dock { margin-top: 20px; min-height: 94px; }
+.mascot-aside .music-dock .headphones { width: 82px; }
+.mascot-aside .music-dock-caption { font-size: 17px; max-width: 105px; }
+@media (prefers-reduced-motion: no-preference) {
+  .visitor-typing i { animation: visitor-typing .9s ease-in-out infinite; }
+  .visitor-typing i:nth-child(2) { animation-delay: .12s; }
+  .visitor-typing i:nth-child(3) { animation-delay: .24s; }
+}
+@keyframes visitor-typing { 50% { opacity: .25; transform: translateY(-2px); } }
+@media (max-width: 1023px) {
+  .mascot-aside { margin-top: 0; }
+  .mascot-portrait { width: 185px; height: 185px; }
+  .visitor-title { font-size: 23px; }
+  .visitor-bubble { padding: 12px; min-height: 75px; }
+  .mascot-hint { font-size: 15px; }
+  .mascot-aside .music-dock { gap: 4px; }
+  .mascot-aside .music-dock .headphones { width: 68px; }
+  .mascot-aside .music-dock-caption { font-size: 16px; max-width: 90px; }
+}
+@media (max-width: 767px) and (min-width: 561px) {
+  .mascot-portrait { width: 170px; height: 170px; }
+  .visitor-title { font-size: 21px; }
+  .visitor-detail { font-size: 10px; }
+}
+@media (max-width: 560px) {
+  .profile-paper.has-mascot { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .has-mascot .mascot-aside { display: grid; grid-template-columns: 126px minmax(0, 1fr); column-gap: 15px; grid-column: 1; grid-row: 1; width: 100%; margin: 0 0 24px; align-items: center; }
+  .mascot-aside .visitor-mascot { display: contents; }
+  .mascot-aside .mascot-portrait { grid-column: 1; grid-row: 1 / span 3; width: 126px; height: 126px; margin: 0; }
+  .mascot-aside .visitor-bubble { grid-column: 2; grid-row: 1; min-height: 68px; padding: 10px; border-radius: 14px 14px 14px 4px; }
+  .mascot-aside .visitor-bubble::after { bottom: 15px; left: -6px; width: 10px; height: 10px; border-right: 0; border-left: 1px solid var(--border); transform: rotate(45deg); }
+  .visitor-title { font-size: 23px; }
+  .visitor-detail { font-size: 10px; }
+  .mascot-aside .mascot-hint { grid-column: 2; grid-row: 2; margin: 8px 0 0; font-size: 13px; }
+  .mascot-aside .music-dock { grid-column: 2; grid-row: 3; flex-direction: row; justify-content: center; min-height: 47px; margin: 5px 0 0; gap: 6px; }
+  .mascot-aside .music-dock .headphones { width: 37px; }
+  .mascot-aside .music-dock-caption { max-width: 94px; font-size: 13px; line-height: 1.1; }
+  .mascot-aside .music-dock-caption svg { display: none; }
+  .has-mascot .profile-intro { grid-column: 1; grid-row: 2; margin: 0; padding: 0; font-size: 22px; }
+  .has-mascot h1 { grid-column: 1; grid-row: 3; max-width: 100%; font-size: clamp(33px, 9vw, 41px); line-height: 1.12; margin: 4px 0 12px; letter-spacing: -1.5px; }
+  .has-mascot .profile-role { grid-column: 1; grid-row: 4; font-size: 19px; margin: 0; }
+  .has-mascot .profile-note { grid-column: 1; grid-row: 5; margin-top: 27px; }
+  .has-mascot .social-links { grid-column: 1; grid-row: 6; }
+  .has-mascot .profile-milestones { grid-column: 1; grid-row: 7; margin-top: 16px; }
+}
+@media (max-width: 360px) {
+  .has-mascot .mascot-aside { grid-template-columns: 108px minmax(0, 1fr); column-gap: 12px; }
+  .mascot-aside .mascot-portrait { width: 108px; height: 108px; }
+  .visitor-title { font-size: 21px; }
+  .visitor-detail { font-size: 9px; }
+  .mascot-aside .mascot-hint { font-size: 12px; }
+}

@@ -31,6 +31,7 @@ Build output is written to `dist/client` and `dist/worker`. Keep `.dev.vars`, `.
 
 - Project screenshots, contribution links, institution logos, and contact links for email and LinkedIn.
 - Three desk palettes, light/dark themes, reduced-motion support, draggable stickers, and optional sounds.
+- An interactive portrait with pointer tracking, tap/keyboard reactions, and visitor greetings. Approximate city greetings use Cloudflare metadata when available; local previews use a time-of-day fallback.
 - Last.fm current/recent tracks and album covers. The API key stays in the Worker.
 - A dinosaur runner integrated into the contact banner, with an expandable view and a shared leaderboard.
 - Space, Up or tap to jump; Down or Ctrl to crouch. Restart is an explicit action after a crash.
@@ -62,6 +63,7 @@ Leaderboard reads are cached at the edge for 60 seconds. If D1 is unavailable, t
 | Route | Response |
 |---|---|
 | `GET /api/music/recent` | Current/latest track, recent tracks, artwork and Last.fm profile. |
+| `GET /api/visitor` | Approximate visitor city, or an empty string when unavailable. Private, uncached response; no database or external lookup. |
 | `GET /api/dino/leaderboard` | Top ten entries, ranked by score then submission time. |
 | `POST /api/dino/scores` | Accepts `{ "nickname": "your name", "score": 123 }` and returns the updated leaderboard. |
 

@@ -18,10 +18,12 @@ import ContactBanner from './components/ContactBanner';
 import ProjectBoard from './components/ProjectBoard';
 import ProjectPreview from './components/ProjectPreview';
 import Achievements from './components/Achievements';
+import VisitorMascot from './components/VisitorMascot';
 import './style.css';
 import './desk.css';
 import './widgets.css';
 import './components/ProjectPreview.css';
+import './components/VisitorMascot.css';
 
 
 const email = 'debaditya2005hait@gmail.com';
@@ -167,11 +169,11 @@ function App() {
     <main id="main">
       <section id="about" className="about-section">
         <div className="desk-label handwritten">welcome to my little corner of the internet.<Doodle name="star"/></div>
-        <div className="profile-paper">
+        <div className="profile-paper has-mascot">
           <Clip className="profile-clip"/>
           <div className="profile-content"><div className="profile-intro handwritten">Hey there, I’m</div><h1>Debaditya Hait<span className="name-period">.</span></h1><p className="profile-role">Software engineer. Open source contributor. Curious by default.</p><div className="profile-note"><span className="note-pin"/><p className="profile-copy">I build across <strong>systems, AI, and the web</strong>. Sometimes that means a new product. Sometimes it’s a small fix in a codebase used by millions.</p><p className="profile-copy secondary-copy">I like understanding how things work, especially when they don’t.</p><Doodle name="scribble" className="profile-note-scribble"/></div>
           <div className="social-links"><a href={github} {...external}><GithubLogo size={20} weight="bold"/>GitHub<ArrowUpRight size={13}/></a><a href="https://www.linkedin.com/in/debadityahait/" {...external}><LinkedinLogo size={20} weight="bold"/>LinkedIn<ArrowUpRight size={13}/></a><a href={`mailto:${email}`}><EnvelopeSimple size={20}/>Email<ArrowUpRight size={13}/></a></div><a className="profile-milestones" href="#achievements"><Trophy size={16}/>Contests & coding profiles<ArrowRight size={13}/></a></div>
-          <div className="profile-aside"><div className="polaroid"><span className="tape tape-profile"/><span className="photo-pushpin"/><img src="/assets/avatar.jpg" width="400" height="400" alt="Debaditya’s GitHub profile artwork: a reflective compact disc"/><span className="handwritten">always a work in progress :)</span></div><MusicSticker onOpen={()=>setModal({type:'music'})}/><span className="avatar-caption handwritten">the GitHub avatar,<br/>not my actual face.</span></div>
+          <div className="profile-aside mascot-aside"><VisitorMascot/><MusicSticker onOpen={()=>setModal({type:'music'})}/></div>
         </div>
         <Calendar/>
         <div className="under-profile"><span className="handwritten">a lot of this happens in the open</span><Doodle name="arrow-curved"/></div>
