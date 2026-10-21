@@ -98,6 +98,6 @@ export default function VisitorMascot() {
       <Mascot directions="/mascots/deba-compact-directions.webp" reactions="/mascots/deba-compact-reactions.webp" size={230} animateOnClick={false}
         className="deba-mascot" label="Debaditya’s portrait" onInteract={sayHello} onDirectionChange={look}/>
     </div>
-    <span id="mascot-hint" className="mascot-hint handwritten">Move around. Say hello.</span>
+    <span id="mascot-hint" className="mascot-hint handwritten"><span className="mascot-hint-pointer">Move around. Say hello.</span><span className="mascot-hint-touch">Tap anywhere. Say hello.</span></span>
   </div>;
 }

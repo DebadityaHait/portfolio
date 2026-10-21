@@ -11,6 +11,11 @@
 .mascot-portrait .deba-mascot { width: 100% !important; height: 100% !important; border-radius: 12px; }
 .deba-mascot:focus-visible { outline: 2px solid var(--yellow); outline-offset: 5px; }
 .mascot-hint { display: block; color: var(--chalk); font-size: 17px; margin-top: 4px; text-align: center; }
+.mascot-hint-touch { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .mascot-hint-pointer { display: none; }
+  .mascot-hint-touch { display: inline; }
+}
 .mascot-aside .music-dock { margin-top: 20px; min-height: 94px; }
 .mascot-aside .music-dock .headphones { width: 82px; }
 .mascot-aside .music-dock-caption { font-size: 17px; max-width: 105px; }

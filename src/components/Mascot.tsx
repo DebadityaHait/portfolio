@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 const DIRECTIONS = [
@@ -89,7 +89,7 @@ export type MascotProps = {
   onDirectionChange?: (direction: Direction) => void
 }
 
-export function Mascot(props: MascotProps) {
+export const Mascot = memo(function Mascot(props: MascotProps) {
   const { directions, reactions, animateOnClick = true, size = 140, className, label = 'mascot', onInteract, onDirectionChange } = props
 
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -100,13 +100,15 @@ export function Mascot(props: MascotProps) {
   const [reaction, setReaction] = useState<Reaction | null>(null)
 
   useEffect(() => {
-    const fine = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const fine = window.matchMedia('(any-hover: hover) and (any-pointer: fine)')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     let sector = -1
     let frame = 0
     let visible = false
     let current: Direction = 'center'
     let pointer: { x: number; y: number } | null = null
+    let tracking = false
+    let trackingMouse = false
 
     const point = (next: Direction) => {
       if (next === current) return
@@ -118,7 +120,7 @@ export function Mascot(props: MascotProps) {
     const aim = () => {
       const button = buttonRef.current
       frame = 0
-      if (!button || !pointer || !visible || document.hidden || !fine.matches || reduced.matches) {
+      if (!button || !pointer || !visible || document.hidden || reduced.matches) {
         return
       }
 
@@ -143,7 +145,16 @@ export function Mascot(props: MascotProps) {
     }
 
     const onPointerMove = (event: PointerEvent) => {
-      if (event.pointerType !== 'mouse' || !visible || document.hidden || !fine.matches || reduced.matches) return
+      if (event.pointerType !== 'mouse') return
+      pointer = { x: event.clientX, y: event.clientY }
+      if (!frame) frame = window.requestAnimationFrame(aim)
+    }
+
+    const onClick = (event: MouseEvent) => {
+      // Native clicks distinguish taps from scrolling and exclude keyboard activation.
+      if (event.detail === 0) return
+      const type = (event as PointerEvent).pointerType
+      if (fine.matches && type !== 'touch' && type !== 'pen') return
       pointer = { x: event.clientX, y: event.clientY }
       if (!frame) frame = window.requestAnimationFrame(aim)
     }
@@ -155,26 +166,48 @@ export function Mascot(props: MascotProps) {
       pointer = null
       point('center')
     }
+    const onPointerLeave = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') rest()
+    }
+    const syncTracking = () => {
+      const active = visible && !document.hidden && !reduced.matches
+      const mouse = active && fine.matches
+      if (active !== tracking) {
+        tracking = active
+        if (active) document.addEventListener('click', onClick, { passive: true, capture: true })
+        else document.removeEventListener('click', onClick, true)
+      }
+      if (mouse !== trackingMouse) {
+        trackingMouse = mouse
+        if (mouse) window.addEventListener('pointermove', onPointerMove, { passive: true })
+        else window.removeEventListener('pointermove', onPointerMove)
+      }
+      if (!active) rest()
+    }
+    const onEnvironmentChange = () => {
+      rest()
+      syncTracking()
+    }
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
-      if (!visible) rest()
+      syncTracking()
     })
     if (buttonRef.current) observer.observe(buttonRef.current)
 
-    window.addEventListener('pointermove', onPointerMove, { passive: true })
     window.addEventListener('blur', rest)
-    document.addEventListener('pointerleave', rest)
-    document.addEventListener('visibilitychange', rest)
-    fine.addEventListener('change', rest)
-    reduced.addEventListener('change', rest)
+    document.addEventListener('pointerleave', onPointerLeave)
+    document.addEventListener('visibilitychange', onEnvironmentChange)
+    fine.addEventListener('change', onEnvironmentChange)
+    reduced.addEventListener('change', onEnvironmentChange)
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove)
+      document.removeEventListener('click', onClick, true)
       window.removeEventListener('blur', rest)
-      document.removeEventListener('pointerleave', rest)
-      document.removeEventListener('visibilitychange', rest)
-      fine.removeEventListener('change', rest)
-      reduced.removeEventListener('change', rest)
+      document.removeEventListener('pointerleave', onPointerLeave)
+      document.removeEventListener('visibilitychange', onEnvironmentChange)
+      fine.removeEventListener('change', onEnvironmentChange)
+      reduced.removeEventListener('change', onEnvironmentChange)
       window.cancelAnimationFrame(frame)
       observer.disconnect()
     }
@@ -226,7 +259,7 @@ export function Mascot(props: MascotProps) {
       ref={buttonRef}
       type="button"
       onClick={boop}
-      aria-label={`Boop the ${label}`}
+      aria-label={`Say hello to ${label}`}
       className={className}
       data-direction={direction}
       data-reaction={reaction || 'none'}
@@ -269,4 +302,4 @@ export function Mascot(props: MascotProps) {
       </span>
     </button>
   )
-}
+})

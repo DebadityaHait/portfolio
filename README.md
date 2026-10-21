@@ -31,7 +31,7 @@ Build output is written to `dist/client` and `dist/worker`. Keep `.dev.vars`, `.
 
 - Project screenshots, contribution links, institution logos, and contact links for email and LinkedIn.
 - Three desk palettes, light/dark themes, reduced-motion support, draggable stickers, and optional sounds.
-- An interactive portrait with pointer tracking, tap/keyboard reactions, and visitor greetings. Approximate city greetings use Cloudflare metadata when available; local previews use a time-of-day fallback.
+- An interactive portrait that follows the mouse or looks toward taps on touchscreens, with tap/keyboard reactions and visitor greetings. Tracking pauses offscreen, in hidden tabs, and with reduced motion. Approximate city greetings use Cloudflare metadata when available; local previews use a time-of-day fallback.
 - Last.fm current/recent tracks and album covers. The API key stays in the Worker.
 - A dinosaur runner integrated into the contact banner, with an expandable view and a shared leaderboard.
 - Space, Up or tap to jump; Down or Ctrl to crouch. Restart is an explicit action after a crash.
