@@ -201,8 +201,6 @@ h1::after { display: none; }
 .project-card { border-radius: 1px; box-shadow: 2px 5px 0 var(--shadow), 7px 15px 20px rgba(7, 20, 33, .16); transform-origin: 50% 0; transform: none; background-image: linear-gradient(110deg, transparent 49.8%, rgba(60, 55, 40, .018) 50%, transparent 50.5%); }
 .project-card:hover { transform: none; }
 .project-image-button { border-radius: 1px; }
-.project-image-button .project-alternate { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: top; opacity: 0; transform: scale(1.04); transition: opacity .45s, transform .6s; }
-.project-image-button:hover .project-alternate, .project-image-button:focus-visible .project-alternate { opacity: 1; transform: scale(1); }
 .image-open { z-index: 2; border-radius: 50%; }
 .project-title-row h3 { font-size: 25px; }
 .project-category { color: var(--accent); }

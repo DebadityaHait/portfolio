@@ -45,7 +45,6 @@
 .scholarship-note span { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
 .profile-milestones { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 11px; margin-top: 15px; }
 .profile-milestones:hover { text-decoration: underline; text-underline-offset: 4px; }
-.project-onyxbin .project-image-button>img { object-fit: contain; background: #15171c; }
 .project-gallery-image { width: 100%; height: auto; aspect-ratio: 1.6; object-fit: contain; background: #15171c; border-radius: 3px; }
 .project-gallery-controls { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
 .project-gallery-controls button { padding: 7px 12px; font-size: 11px; border: 1px solid var(--border); color: var(--muted); background: transparent; border-radius: 3px; transition: background .2s, color .2s; }

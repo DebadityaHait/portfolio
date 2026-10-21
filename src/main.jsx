@@ -16,10 +16,12 @@ import { Doodle } from './components/Sketch';
 import { MusicPanel, MusicSticker } from './components/Music';
 import ContactBanner from './components/ContactBanner';
 import ProjectBoard from './components/ProjectBoard';
+import ProjectPreview from './components/ProjectPreview';
 import Achievements from './components/Achievements';
 import './style.css';
 import './desk.css';
 import './widgets.css';
+import './components/ProjectPreview.css';
 
 
 const email = 'debaditya2005hait@gmail.com';
@@ -93,8 +95,8 @@ function ContributionLog({onClose}) {
   </>;
 }
 
-function ProjectGallery({images}) {
-  const [selected,setSelected]=useState(0);
+function ProjectGallery({images,initialIndex=0}) {
+  const [selected,setSelected]=useState(initialIndex);
   const reduced=useReducedMotion();
   const image=images[selected];
   return <div className="project-gallery">
@@ -104,14 +106,14 @@ function ProjectGallery({images}) {
   </div>;
 }
 
-function ProjectDetail({project,onClose}) {
+function ProjectDetail({project,onClose,initialIndex=0}) {
   return <><div className="dialog-heading"><div><span className="handwritten">{project.category}</span><h2>{project.name}</h2></div><button className="icon-button" aria-label="Close project details" onClick={onClose}><X size={24}/></button></div>
-    {project.gallery?<ProjectGallery images={project.gallery}/>:<><img className={`detail-image detail-${project.id}`} src={project.image} alt={`${project.name} ${project.imageNote.toLowerCase()}`}/><div className="detail-caption">{project.imageNote}</div></>}
+    {project.gallery?<ProjectGallery images={project.gallery} initialIndex={initialIndex}/>:<><img className={`detail-image detail-${project.id}`} src={project.image} alt={`${project.name} ${project.imageNote.toLowerCase()}`}/><div className="detail-caption">{project.imageNote}</div></>}
     <p className="detail-lead">{project.details}</p>
     <h3 className="detail-heading">Under the hood</h3>
     <ul className="engineering-list">{project.engineering.map(s=><li key={s}><Check size={18}/><span>{s}</span></li>)}</ul>
     <div className="detail-note">{project.note}</div>
-    <div className="detail-links">{project.live&&<a href={project.live} {...external} className="solid-button">{project.liveLabel || 'Explore the project'} <ArrowUpRight size={17}/></a>}{project.repo&&<a href={project.repo} {...external} className="text-button"><GithubLogo size={19}/> Source code <ArrowUpRight size={15}/></a>}</div>
+    <div className="detail-links">{project.live&&<a href={project.live} {...external} className="solid-button">{project.liveLabel || 'Explore the project'} <ArrowUpRight size={17}/></a>}{project.demo&&<a href={project.demo} {...external} className="text-button">{project.demoLabel || 'Open the demo'} <ArrowUpRight size={15}/></a>}{project.repo&&<a href={project.repo} {...external} className="text-button"><GithubLogo size={19}/> Source code <ArrowUpRight size={15}/></a>}</div>
   </>;
 }
 
@@ -189,7 +191,7 @@ function App() {
         <div className="laptop-holder"><DraggableSticker src="/assets/macbook.webp" label="One more side project won’t hurt." rotation={-12} resetKey={resetKey} className="laptop-sticker"/><Doodle name="arrow-curved"/><span className="handwritten">famous last words.</span></div>
         <SectionTitle id="projects-heading" note="Ideas that turned into code, and kept going.">Things I’ve put together</SectionTitle>
         <ProjectBoard>{projects.map((project,index)=><motion.article key={project.id} className={`project-card project-${project.id}`} style={{'--rotation':`${[-1.5,1.3,.9,-1.1][index]}deg`}} initial={{opacity:0,y:reduced?0:-20,rotate:reduced?0:[-6,5,4,-5][index]}} whileInView={{opacity:1,y:0,rotate:[-1.5,1.3,.9,-1.1][index]}} viewport={{once:true,amount:.15}} whileHover={reduced?undefined:{rotate:0}} transition={{type:'spring',stiffness:100,damping:14,delay:index%2*.12}}>
-          <button className="project-image-button" onClick={()=>{setModal({type:'project',project});playDeskSound();}} aria-label={`Read about ${project.name}`}><img src={project.image} alt={`${project.name} ${project.imageNote.toLowerCase()}`} loading="lazy" width="1200" height="740"/>{project.alternateImage&&<img className="project-alternate" src={project.alternateImage} alt={project.alternateAlt} loading="lazy" width="1200" height="740"/>}<span className="image-open"><ArrowUpRight size={22}/></span></button>
+          <ProjectPreview project={project} onOpen={initialIndex=>{setModal({type:'project',project,initialIndex});playDeskSound();}}/>
           <div className="project-content"><div className="project-title-row"><h3><button onClick={()=>setModal({type:'project',project})}>{project.name}</button></h3><div className="project-icon-links">{project.repo&&<a href={project.repo} {...external} aria-label={`${project.name} source on GitHub`}><GithubLogo size={21}/></a>}{project.live&&<a href={project.live} {...external} aria-label={`Visit ${project.name}`}><ArrowSquareOut size={21}/></a>}</div></div><p className="project-category handwritten">{project.category}</p><p className="project-description">{project.description}</p><div className="project-tags">{project.tags.map(tag=><span key={tag}>{tag}</span>)}</div><div className="project-card-footer"><span>{project.imageNote}</span><button onClick={()=>setModal({type:'project',project})}>Take a closer look <ArrowUpRight size={15}/></button></div></div>
         </motion.article>)}</ProjectBoard>
         <div className="more-projects-paper"><span className="tape tape-more"/><h3 className="handwritten">There’s a little more in the drawer.</h3><div className="more-projects-list">{moreProjects.map(p=><a href={p.url} {...external} key={p.name}><div className="more-project-title"><strong>{p.name}</strong><span>{p.kind}</span><ArrowUpRight size={17}/></div><p>{p.description}</p></a>)}</div><a className="all-repos-link" href={`${github}?tab=repositories`} {...external}>All repositories <ArrowRight size={16}/></a></div>
@@ -205,7 +207,7 @@ function App() {
     </main>
     <footer><a className="footer-name" href="#about">Debaditya Hait<span className="handwritten">still figuring things out, still shipping.</span></a><div className="footer-links"><a href={github} {...external} aria-label="GitHub"><GithubLogo size={20}/></a><a href="https://www.linkedin.com/in/debadityahait/" {...external} aria-label="LinkedIn"><LinkedinLogo size={20}/></a><a href={`mailto:${email}`} aria-label="Email"><EnvelopeSimple size={20}/></a></div><a href="#about" className="back-top" aria-label="Back to top"><ArrowUp size={18}/></a><div className="footer-bottom"><span>© {new Date().getFullYear()} Debaditya Hait</span><span>Doodles by <a href="https://www.fffuel.co/dddoodle/" {...external}>fffuel (CC BY 4.0)</a></span></div></footer>
     <DeskTools onReplay={()=>{window.scrollTo({top:0,behavior:'instant'});setReady(false);setReplay(n=>n+1);}} onReset={()=>setResetKey(n=>n+1)} palette={palette} setPalette={setPalette}/>
-    <dialog ref={dialog} className={`paper-dialog ${modal?.type==='contributions'?'log-dialog':''} ${modal?.type==='music'?'music-dialog':''}`} aria-label={modal?.type==='project'?`${modal.project.name} project details`:modal?.type==='music'?'Recent music from Last.fm':'Open source contribution log'} onCancel={()=>setModal(null)} onClose={()=>{setModal(null);document.body.classList.remove('dialog-open');}} onClick={e=>{if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-content">{modal?.type==='contributions'?<ContributionLog onClose={()=>setModal(null)}/>:modal?.type==='project'?<ProjectDetail project={modal.project} onClose={()=>setModal(null)}/>:modal?.type==='music'?<MusicPanel onClose={()=>setModal(null)}/>:null}</div></dialog>
+    <dialog ref={dialog} className={`paper-dialog ${modal?.type==='contributions'?'log-dialog':''} ${modal?.type==='music'?'music-dialog':''}`} aria-label={modal?.type==='project'?`${modal.project.name} project details`:modal?.type==='music'?'Recent music from Last.fm':'Open source contribution log'} onCancel={()=>setModal(null)} onClose={()=>{setModal(null);document.body.classList.remove('dialog-open');}} onClick={e=>{if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-content">{modal?.type==='contributions'?<ContributionLog onClose={()=>setModal(null)}/>:modal?.type==='project'?<ProjectDetail key={modal.project.id} project={modal.project} initialIndex={modal.initialIndex || 0} onClose={()=>setModal(null)}/>:modal?.type==='music'?<MusicPanel onClose={()=>setModal(null)}/>:null}</div></dialog>
   </div>;
 }
 
