@@ -146,6 +146,21 @@ async function recentMusic(request, env, ctx) {
 export default {
   async fetch(request, env, ctx) {
     const path = new URL(request.url).pathname;
+    const resumes = {
+      '/resume/sde': 'Debaditya_Hait_SDE_Resume.pdf',
+      '/resume/ai': 'Debaditya_Hait_AI_Engineer_Resume.pdf',
+    };
+    if (Object.hasOwn(resumes, path)) {
+      if (!['GET', 'HEAD'].includes(request.method)) return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
+      const url = new URL(request.url);
+      url.pathname = `/resume-files/${resumes[path]}`;
+      const response = await env.ASSETS.fetch(new Request(url, request));
+      if (response.status !== 304 && !response.headers.get('Content-Type')?.toLowerCase().startsWith('application/pdf')) return new Response('Resume unavailable', { status: 404 });
+      const headers = new Headers(response.headers);
+      headers.set('Content-Disposition', `inline; filename="${resumes[path]}"`);
+      headers.set('X-Content-Type-Options', 'nosniff');
+      return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+    }
     if (!path.startsWith('/api/')) return env.ASSETS.fetch(request);
     try {
       if (path === '/api/visitor' && request.method === 'GET') {
