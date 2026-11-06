@@ -1,4 +1,8 @@
 import { starterScores } from './starterScores.js';
+import { createRemoteJWKSet, jwtVerify } from 'jose';
+
+const accessIssuer = 'https://rough-sunset-973f.cloudflareaccess.com';
+const accessKeys = createRemoteJWKSet(new URL(`${accessIssuer}/cdn-cgi/access/certs`));
 
 const json = (value, status = 200, extra = {}) => Response.json(value, {
   status,
@@ -150,8 +154,53 @@ export default {
       '/resume/sde': 'Debaditya_Hait_SDE_Resume.pdf',
       '/resume/ai': 'Debaditya_Hait_AI_Engineer_Resume.pdf',
     };
+    if (path === '/admin/resumes' || path.startsWith('/admin/resumes/')) {
+      const token = request.headers.get('Cf-Access-Jwt-Assertion');
+      let identity;
+      try {
+        if (env.RESUME_ACCESS_AUD && token && token.length < 16384) ({ payload: identity } = await jwtVerify(token, accessKeys, { issuer: accessIssuer, audience: env.RESUME_ACCESS_AUD, algorithms: ['RS256'] }));
+      } catch { /* Missing or invalid Access assertions fail closed. */ }
+      if (typeof identity?.email !== 'string' || identity.email.toLowerCase() !== 'moistsyt@gmail.com') {
+        return json({ error: 'Sign in through Cloudflare Access.' }, 403);
+      }
+      if (path === '/admin/resumes' || path === '/admin/resumes/') {
+        if (!['GET', 'HEAD'].includes(request.method)) return json({ error: 'Method not allowed.' }, 405, { Allow: 'GET, HEAD' });
+        const url = new URL(request.url); url.pathname = '/index.html';
+        return env.ASSETS.fetch(new Request(url, request));
+      }
+      const role = path.match(/^\/admin\/resumes\/(sde|ai)$/)?.[1];
+      if (!role) return json({ error: 'Not found.' }, 404);
+      if (!env.RESUMES) return json({ error: 'Resume storage is unavailable.' }, 503);
+      if (request.method === 'GET') {
+        const object = await env.RESUMES.head(role);
+        return json({ updatedAt: object?.uploaded?.toISOString() || null, size: object?.size || null });
+      }
+      if (request.method !== 'PUT') return json({ error: 'Method not allowed.' }, 405, { Allow: 'GET, PUT' });
+      if (request.headers.get('Origin') !== new URL(request.url).origin) return json({ error: 'Upload from this site.' }, 403);
+      if (!request.headers.get('Content-Type')?.toLowerCase().startsWith('application/pdf')) return json({ error: 'Choose a PDF file.' }, 415);
+      const length = Number(request.headers.get('Content-Length'));
+      if (!Number.isSafeInteger(length) || length < 5 || length > 5 * 1024 * 1024) return json({ error: 'Choose a PDF under 5 MB.' }, 413);
+      const reader = request.body?.getReader();
+      if (!reader) return json({ error: 'Choose a PDF file.' }, 400);
+      const chunks = []; let total = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        total += value.byteLength;
+        if (total > 5 * 1024 * 1024) { await reader.cancel(); return json({ error: 'Choose a PDF under 5 MB.' }, 413); }
+        chunks.push(value);
+      }
+      const bytes = new Uint8Array(total); let offset = 0;
+      for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+      if (bytes.byteLength !== length || new TextDecoder().decode(bytes.subarray(0, 5)) !== '%PDF-') return json({ error: 'This file does not appear to be a PDF.' }, 400);
+      const object = await env.RESUMES.put(role, bytes, { httpMetadata: { contentType: 'application/pdf' } });
+      return json({ updatedAt: object.uploaded.toISOString(), size: object.size });
+    }
     if (Object.hasOwn(resumes, path)) {
       if (!['GET', 'HEAD'].includes(request.method)) return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
+      const role = path.endsWith('/sde') ? 'sde' : 'ai';
+      const object = await env.RESUMES?.get(role);
+      if (object) return new Response(request.method === 'HEAD' ? null : object.body, { headers: { 'Content-Type': 'application/pdf', 'Content-Disposition': `inline; filename="${resumes[path]}"`, 'Content-Length': String(object.size), 'Cache-Control': 'public, max-age=0, must-revalidate', 'ETag': object.httpEtag, 'X-Content-Type-Options': 'nosniff' } });
       const url = new URL(request.url);
       url.pathname = `/resume-files/${resumes[path]}`;
       const response = await env.ASSETS.fetch(new Request(url, request));

@@ -29,6 +29,7 @@ Build output is written to `dist/client` and `dist/worker`. Keep `.dev.vars`, `.
 
 ## Features
 
+- Role-specific resumes with stable public URLs and a Cloudflare Access-protected upload page. The `RESUMES` R2 binding stores replacements; the original PDFs remain the fallback until each role is updated.
 - Project screenshots, contribution links, institution logos, and contact links for email and LinkedIn.
 - Three desk palettes, light/dark themes, reduced-motion support, draggable stickers, and optional sounds.
 - An interactive portrait that follows the mouse or looks toward taps on touchscreens, with tap/keyboard reactions and visitor greetings. Tracking pauses offscreen, in hidden tabs, and with reduced motion. Approximate city greetings use Cloudflare metadata when available; local previews use a time-of-day fallback.
@@ -36,6 +37,8 @@ Build output is written to `dist/client` and `dist/worker`. Keep `.dev.vars`, `.
 - A dinosaur runner integrated into the contact banner, with an expandable view and a shared leaderboard.
 - Space, Up or tap to jump; Down or Ctrl to crouch. Restart is an explicit action after a crash.
 - The highest unshared score survives replay and refresh in the same tab. Submitted scores and nicknames are public.
+
+To update a resume, visit `/admin/resumes`, sign in through Cloudflare Access, select a PDF under 5 MB, and choose **Update resume**. The replacement is public immediately at its existing `/resume/sde` or `/resume/ai` link. The Worker verifies the Access assertion and authorized email before handling uploads. The configured Access issuer, audience, allowed email, R2 binding, and Access policy must be updated together if moving this deployment to another account.
 - Rendering is capped at 60Hz and pauses offscreen, on blur, or when the tab is hidden.
 
 ## Cloudflare deployment

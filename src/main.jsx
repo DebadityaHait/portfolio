@@ -25,6 +25,7 @@ import './widgets.css';
 import './components/ProjectPreview.css';
 import './components/VisitorMascot.css';
 import ResumePage from './components/ResumePage';
+import ResumeAdmin from './components/ResumeAdmin';
 
 
 const email = 'debaditya2005hait@gmail.com';
@@ -214,4 +215,5 @@ function App() {
   </div>;
 }
 
-createRoot(document.getElementById('root')).render(window.location.pathname.replace(/\/$/, '') === '/resume' ? <ResumePage/> : <App/>);
+const route = window.location.pathname.replace(/\/$/, '');
+createRoot(document.getElementById('root')).render(route === '/admin/resumes' ? <ResumeAdmin/> : route === '/resume' ? <ResumePage/> : <App/>);

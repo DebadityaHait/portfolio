@@ -15,12 +15,15 @@
     "run_worker_first": [
       "/api/*",
       "/resume/sde",
-      "/resume/ai"
+      "/resume/ai",
+      "/admin/resumes*"
     ]
   },
   "vars": {
-    "LASTFM_USERNAME": "zvrz"
+    "LASTFM_USERNAME": "zvrz",
+    "RESUME_ACCESS_AUD": "73bb998baf4559c8ec49d0a9881d5f45e9fffe8fb56c2d99ab16cb0ae36a0ef2"
   },
+  "r2_buckets": [{ "binding": "RESUMES", "bucket_name": "dhait-portfolio-resumes" }],
   "d1_databases": [
     {
       "binding": "DB",

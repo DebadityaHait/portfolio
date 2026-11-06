@@ -1,0 +1,12 @@
+.admin-intro { margin: 14px 0 32px; color: #4a5d67; line-height: 1.6; }
+.admin-item { padding: 25px 0; }
+.admin-view { display: inline-flex; gap: 4px; align-items: center; color: #244d68; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.admin-item form { display: grid; justify-items: start; gap: 10px; margin-top: 20px; }
+.admin-item label { font-size: 14px; font-weight: 700; }
+.admin-item input { max-width: 100%; color: #263849; font: inherit; font-size: 14px; }
+.admin-item input::file-selector-button { padding: 8px 12px; margin-right: 10px; border: 1px solid #a79c8b; border-radius: 4px; background: #fffaf0; color: #263849; cursor: pointer; }
+.admin-item button { border: 0; border-radius: 4px; padding: 10px 16px; background: #304f61; color: #fff; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.admin-item button:hover:not(:disabled) { background: #203d53; }
+.admin-item button:disabled { opacity: .55; cursor: not-allowed; }
+.admin-item button:focus-visible, .admin-item input:focus-visible { outline: 2px solid #a54f36; outline-offset: 4px; }
+.admin-item .admin-message { color: #263849; font-size: 14px; line-height: 1.5; }
