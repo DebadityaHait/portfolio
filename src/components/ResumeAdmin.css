@@ -1,12 +1,49 @@
 .admin-intro { margin: 14px 0 32px; color: #4a5d67; line-height: 1.6; }
-.admin-item { padding: 25px 0; }
+.admin-item { grid-template-columns: 32px minmax(0, 1fr); padding: 25px 0; }
 .admin-view { display: inline-flex; gap: 4px; align-items: center; color: #244d68; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .admin-item form { display: grid; justify-items: start; gap: 10px; margin-top: 20px; }
 .admin-item label { font-size: 14px; font-weight: 700; }
-.admin-item input { max-width: 100%; color: #263849; font: inherit; font-size: 14px; }
+.admin-item input { box-sizing: border-box; width: 100%; min-width: 0; max-width: 100%; color: #263849; font: inherit; font-size: 14px; }
 .admin-item input::file-selector-button { padding: 8px 12px; margin-right: 10px; border: 1px solid #a79c8b; border-radius: 4px; background: #fffaf0; color: #263849; cursor: pointer; }
 .admin-item button { border: 0; border-radius: 4px; padding: 10px 16px; background: #304f61; color: #fff; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
 .admin-item button:hover:not(:disabled) { background: #203d53; }
 .admin-item button:disabled { opacity: .55; cursor: not-allowed; }
 .admin-item button:focus-visible, .admin-item input:focus-visible { outline: 2px solid #a54f36; outline-offset: 4px; }
 .admin-item .admin-message { color: #263849; font-size: 14px; line-height: 1.5; }
+.admin-setting { display: flex; gap: 20px; align-items: center; justify-content: space-between; padding: 20px 0 26px; }
+.admin-setting h2, .admin-custom h2 { color: #263849; font-size: 20px; margin: 0; }
+.admin-setting p, .admin-custom > p { color: #4a5d67; font-size: 14px; line-height: 1.6; margin: 8px 0 0; }
+.admin-setting button, .admin-create button, .admin-link button { border: 0; border-radius: 4px; padding: 10px 14px; background: #304f61; color: white; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.admin-setting button:disabled, .admin-create button:disabled { opacity: .55; cursor: not-allowed; }
+.admin-custom { padding: 35px 0; }
+.admin-create { display: grid; gap: 9px; margin-top: 20px; }
+.admin-create label { margin-top: 8px; color: #263849; font-size: 14px; font-weight: 700; }
+.admin-create input:not([type=file]):not([type=checkbox]) { box-sizing: border-box; min-width: 0; max-width: 100%; width: 100%; padding: 10px; border: 1px solid #a79c8b; border-radius: 4px; background: #fffaf0; color: #263849; font: inherit; }
+.admin-create input[type=file] { max-width: 100%; color: #263849; font: inherit; font-size: 14px; }
+.admin-create button { justify-self: start; margin-top: 8px; }
+.slug-field { display: flex; align-items: center; gap: 5px; color: #4a5d67; font-size: 13px; }
+.slug-field input { flex: 1; }
+.admin-link { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.admin-link code { width: 100%; overflow-wrap: anywhere; font-size: 13px; color: #263849; }
+.admin-visibility { width: 100%; font-size: 13px; color: #4a5d67; }
+.admin-create .admin-check { display: flex; gap: 9px; align-items: center; font-weight: 500; }
+.admin-create .admin-check input { width: auto; flex: 0 0 auto; }
+.admin-link button { padding: 7px 10px; }
+.admin-link .admin-delete { background: transparent; color: #963e2c; text-decoration: underline; text-underline-offset: 3px; }
+.admin-status { color: #263849; font-size: 14px; margin-top: 15px; }
+.admin-setting button:focus-visible, .admin-create :focus-visible, .admin-link button:focus-visible { outline: 2px solid #a54f36; outline-offset: 4px; }
+@media (max-width: 560px) { .admin-setting { align-items: start; flex-direction: column; } .slug-field { align-items: start; flex-direction: column; } }
+.assignment-section { border-top: 1px solid #d6cbbb; }
+.assignment-section select, .assignment-toolbar input { box-sizing: border-box; min-width: 0; width: 100%; padding: 10px; border: 1px solid #a79c8b; border-radius: 4px; background: #fffaf0; color: #263849; font: inherit; }
+.assignment-toolbar { display: grid; gap: 9px; margin-top: 28px; }
+.assignment-toolbar label, .assignment-row label { color: #263849; font-size: 14px; font-weight: 700; }
+.assignment-toolbar button, .agent-row button, .agent-secret button { justify-self: start; border: 0; border-radius: 4px; padding: 9px 12px; background: #304f61; color: white; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.assignment-list { margin-top: 20px; }
+.assignment-row { display: grid; gap: 9px; padding: 20px 0; border-top: 1px solid #d6cbbb; }
+.assignment-row a { color: #244d68; overflow-wrap: anywhere; font-weight: 700; }
+.assignment-row .admin-link { margin-top: 0; }
+.agent-row { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 12px 0; border-top: 1px solid #d6cbbb; color: #263849; }
+.agent-secret { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding: 16px; background: #f1e7d4; color: #263849; }
+.agent-secret strong, .agent-secret code { width: 100%; overflow-wrap: anywhere; }
+.assignment-section :focus-visible { outline: 2px solid #a54f36; outline-offset: 4px; }
+.admin-create { grid-template-columns: minmax(0, 1fr); min-width: 0; }

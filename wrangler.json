@@ -14,8 +14,10 @@
     "not_found_handling": "single-page-application",
     "run_worker_first": [
       "/api/*",
-      "/resume/sde",
-      "/resume/ai",
+      "/resume",
+      "/resume/*",
+      "/resumes",
+      "/resumes/",
       "/admin/resumes*"
     ]
   },

@@ -166,7 +166,7 @@ function App() {
     <IntroLoader replayKey={replay} onReady={()=>setReady(true)}/>
     <DeskScene resetKey={resetKey} ready={ready}/>
     <a href="#main" className="skip-link">Skip to content</a>
-    <header className="site-header"><nav aria-label="Main navigation"><a className="wordmark" href="#about" aria-label="Debaditya Hait, home">dh<span>.</span></a><div className="nav-links">{[['about','About'],['open-source','Open source'],['projects','Projects'],['background','Background']].map(([id,label])=><a key={id} href={`#${id}`} className={active===id?'active':''} aria-current={active===id?'location':undefined} onClick={()=>playDeskSound()}>{active===id&&<motion.span layoutId="nav-highlight" className="nav-highlight" transition={{type:'spring',stiffness:330,damping:30}}/>}<span>{label}</span></a>)}</div><div className="nav-actions"><button className="icon-button theme-toggle" onClick={()=>{setTheme(theme==='light'?'dark':'light');playDeskSound('switch');}} aria-label={`Switch to ${theme==='light'?'dark':'light'} theme`}>{theme==='light'?<Moon size={19}/>:<Sun size={19}/>}</button><a href="#contact" className="nav-contact">Say hello <ArrowUpRight size={16}/></a></div></nav></header>
+    <header className="site-header"><nav aria-label="Main navigation"><a className="wordmark" href="#about" aria-label="Debaditya Hait, home">dh<span>.</span></a><div className="nav-links">{[['about','About'],['open-source','Open source'],['projects','Projects'],['background','Background']].map(([id,label])=><a key={id} href={`#${id}`} className={active===id?'active':''} aria-current={active===id?'location':undefined} onClick={()=>playDeskSound()}>{active===id&&<motion.span layoutId="nav-highlight" className="nav-highlight" transition={{type:'spring',stiffness:330,damping:30}}/>}<span>{label}</span></a>)}</div><div className="nav-actions"><a className="nav-resume" href="/resume">Resume</a><button className="icon-button theme-toggle" onClick={()=>{setTheme(theme==='light'?'dark':'light');playDeskSound('switch');}} aria-label={`Switch to ${theme==='light'?'dark':'light'} theme`}>{theme==='light'?<Moon size={19}/>:<Sun size={19}/>}</button><a href="#contact" className="nav-contact">Say hello <ArrowUpRight size={16}/></a></div></nav></header>
 
     <main id="main">
       <section id="about" className="about-section">
@@ -216,4 +216,4 @@ function App() {
 }
 
 const route = window.location.pathname.replace(/\/$/, '');
-createRoot(document.getElementById('root')).render(route === '/admin/resumes' ? <ResumeAdmin/> : route === '/resume' ? <ResumePage/> : <App/>);
+createRoot(document.getElementById('root')).render(route === '/admin/resumes' ? <ResumeAdmin/> : route === '/resumes' ? <ResumePage/> : <App/>);
