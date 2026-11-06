@@ -165,7 +165,7 @@ export default {
       }
       if (path === '/admin/resumes' || path === '/admin/resumes/') {
         if (!['GET', 'HEAD'].includes(request.method)) return json({ error: 'Method not allowed.' }, 405, { Allow: 'GET, HEAD' });
-        const url = new URL(request.url); url.pathname = '/index.html';
+        const url = new URL(request.url); url.pathname = '/';
         return env.ASSETS.fetch(new Request(url, request));
       }
       const role = path.match(/^\/admin\/resumes\/(sde|ai)$/)?.[1];
