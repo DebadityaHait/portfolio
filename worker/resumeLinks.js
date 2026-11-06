@@ -37,6 +37,7 @@ export async function variants(env) {
     if (['swe', 'list', 'visibility'].includes(slug)) continue;
     const item = await env.RESUMES.head(standard[slug] ? slug : `custom/${slug}`);
     if (!item && !['sde', 'ai'].includes(slug)) continue;
+    if (!standard[slug] && item?.customMetadata?.listed !== 'true') continue;
     let title = standard[slug] || slug;
     if (item?.customMetadata?.title) { try { title = decodeURIComponent(item.customMetadata.title); } catch { /* retain slug */ } }
     result.push({ id: slug, title });
